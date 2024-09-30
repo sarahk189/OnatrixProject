@@ -1,0 +1,55 @@
+﻿@model OnatrixProject.Models.ContactFormModels
+@using Umbraco.Cms.Web.Common.PublishedModels;
+@inject Umbraco.Cms.Web.Common.UmbracoHelper UmbracoHelper
+@using Umbraco.Cms.Core.PropertyEditors.ValueConverters;
+
+@{
+    var rootContents = UmbracoHelper.ContentAtRoot();
+    var settings = rootContents.FirstOrDefault(x => x.ContentType.Alias == "settingsPage") ?? null;
+
+    var sectionBackgroundColorLabel = settings?.Value<ColorPickerValueConverter.PickedColor>("onlineSupportBackgroundColor")?.Label.ToLower() ?? null;
+    var backgroundColorClass = (!string.IsNullOrEmpty(sectionBackgroundColorLabel) && sectionBackgroundColorLabel != "none") ? $"bg-{sectionBackgroundColorLabel}" : "";
+}
+
+<div class="online-support-container @backgroundColorClass">
+    <h4>How Can We Help You?</h4>
+    <p>Online support 24/7. We are here to help you.</p>
+    @using (Html.BeginUmbracoForm("HandleSubmitEmailOnly", "ContactSurface", FormMethod.Post))
+    {
+        <div class="form-group">
+            <div class="input-group">
+                <input type="email" class="form-control" id="Email" name="Email" placeholder="Email address" value="@Model.Email" />
+                <div class="input-group-placeholder">
+                    <span class="input-group-icon"><i class="fa-sharp fa-light fa-envelope"></i></span>
+                </div>
+            </div>
+            <span class="text-danger">@ViewData["error_email"]</span>
+        </div>
+        <button type="submit" class="btn btn-primary submit-btn" style="display: none;">Submit</button>
+    }
+
+    @if (TempData["success"] != null)
+    {
+        <div class="alert alert-success" role="alert">
+            @TempData["success"]
+        </div>
+    }
+    <div class="background-icon">
+        <i class="fa-sharp fa-light fa-envelope"></i>
+    </div>
+</div>
+
+<script>
+    document.getElementById('Email').addEventListener('input', function () {
+        var submitButton = document.querySelector('.submit-btn');
+        if (this.value.trim() !== '') {
+            submitButton.style.display = 'block';
+        } else {
+            submitButton.style.display = 'none';
+        }
+    });
+</script>
+
+
+
+

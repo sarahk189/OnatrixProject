@@ -1,5 +1,5 @@
 ﻿
-$border-color: var(--color-gray);
+$border-color: var(--color-border-gray);
 $padding: 20px;
 
 .container {
@@ -13,13 +13,13 @@ $padding: 20px;
 }
 
 .aside-right {
-    width: 25%;
+    width: 30%;
     padding: $padding;
     border-left: 1px solid $border-color;
 }
 
 .aside-left {
-    width: 25%;
+    width: 30%;
     padding: $padding;
     border-right: 1px solid $border-color;
 }

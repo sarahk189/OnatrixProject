@@ -1,5 +1,7 @@
 ﻿@using Umbraco.Cms.Web.Common.PublishedModels;
-@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.ProjectItemTemplate>;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+
 @{
     Layout = "~/Views/mainLayout.cshtml";
     ViewBag.Title = Model?.Name ?? "model name not working";
@@ -18,8 +20,9 @@
                 @await Html.PartialAsync("Partials/static/tags.cshtml")
             </div>
             <div class="contact">
-                <!-- Contact content here -->
+                @await Html.PartialAsync("Partials/static/onlineSupport.cshtml", new OnatrixProject.Models.ContactFormModels())
             </div>
         </aside>
     </div>
 </section>
+

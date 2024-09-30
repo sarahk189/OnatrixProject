@@ -1,4 +1,4 @@
-$border-color: var(--color-gray);
+$border-color: var(--color-border-gray);
 $padding: 20px;
 
 .projects {
@@ -26,18 +26,21 @@ $padding: 20px;
         .item-text {
             display: flex;
             flex-direction: column;
+            text-decoration: none;
 
             .header {
                 h4 {
                     margin: 0;
                     font-size: 1.2em; 
+                    text-decoration: none;
                 }
             }
     
             .date {
-                color: var(--color-gray);
+                color: var(--color-border-gray);
                 font-size: 0.9em; 
                 margin-top: 5px;
+                text-decoration: none;
             }
         }
     }

@@ -1,0 +1,37 @@
+.tags {
+    height: 300px;
+    width: 290px;
+    padding: 20px;
+    
+    .aside-tags {
+        
+        .aside-container {
+            padding: 20px;
+            margin-right: 20%;
+            
+            .tag-header {
+               margin-bottom: 20px !important;
+            }
+
+            .tag-list {
+                display: flex;
+                align-items: center;
+
+                .tag {
+                    margin-top: 20px;
+                    border: 1px solid var(--color-primary-light);
+                    border-radius: 25px;
+                    padding: 10px 20px;
+                    align-items: center;
+                    justify-content: space-evenly;
+                    margin-right: 20px;
+
+                    &:hover {
+                        background-color: var(--color-primary-light);
+                        color: var(--color-white);
+                    }
+                }
+            }
+        }
+    }
+}

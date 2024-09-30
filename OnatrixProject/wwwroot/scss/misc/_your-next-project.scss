@@ -1,0 +1,48 @@
+#prefooter {
+    padding: 20px 0;
+    background-color: var(--color-background); // Adjust as needed
+
+    .container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .left-pictures {
+        display: flex;
+        flex-direction: column;
+        gap: 10px; // Space between images
+
+        .background-image1,
+        .background-image2,
+        .picture {
+            width: 100px; // Adjust size as needed
+            height: 100px; // Adjust size as needed
+            background-size: cover;
+            background-position: center;
+        }
+    }
+
+    .row {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        .prefooter-content {
+            h2 {
+                margin-bottom: 20px;
+                font-size: 1.5rem; // Adjust as needed
+            }
+
+            .office-location,
+            .office-phone,
+            .office-email {
+                margin-bottom: 10px;
+
+                p:first-child {
+                    font-weight: bold;
+                }
+            }
+        }
+    }
+}

@@ -38,5 +38,19 @@ namespace OnatrixProject.Controllers
             TempData["success"] = "Thank you for your message! We will get back to you as soon as possible!";
             return RedirectToCurrentUmbracoPage();
         }
+
+        [HttpPost]
+        public IActionResult HandleSubmitEmailOnly(ContactFormModels form)
+        {
+            if (string.IsNullOrEmpty(form.Email))
+            {
+                TempData["email"] = form.Email;
+                TempData["error_email"] = "Email is required.";
+                return CurrentUmbracoPage();
+            }
+
+            TempData["success"] = "Thank you for your message! We will get back to you as soon as possible!";
+            return RedirectToCurrentUmbracoPage();
+        }
     }
 }

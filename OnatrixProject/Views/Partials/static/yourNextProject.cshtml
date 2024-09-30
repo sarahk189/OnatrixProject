@@ -1,6 +1,7 @@
 ﻿@using Umbraco.Cms.Web.Common.PublishedModels;
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
 @inject Umbraco.Cms.Web.Common.UmbracoHelper UmbracoHelper
+@using Umbraco.Cms.Core.PropertyEditors.ValueConverters;
 
 @{
     var rootContents = UmbracoHelper.ContentAtRoot();
@@ -8,21 +9,25 @@
     var officeLocation = settings?.Value<string>("officeLocation") ?? "";
     var officePhoneNumber = settings?.Value<string>("officePhoneNumber") ?? "";
     var officeEmail = settings?.Value<string>("officeEmail") ?? "";
-    var backgroundImage1 = settings?.Value<IPublishedContent>("backgroundImagePreFooter1") ?? null;
-    var backgroundImage2 = settings?.Value<IPublishedContent>("backgroundImagePreFooter2") ?? null;
-    var backgroundColor = settings?.Value<string>("backgroundColorPreFooter") ?? "";
-    var picture = settings?.Value<IPublishedContent>("mainPicturePreFooter") ?? null;
-    var header = settings?.Value<string>("preFooterHeader") ?? "";
 
+    var backgroundImage1 = settings?.Value<IPublishedContent>("backgroundImagePreFooter1");
+    var background1Alt = settings?.Value<string>("backgroundImage1Alt") ?? "";
+
+    var backgroundImage2 = settings?.Value<IPublishedContent>("backgroundImagePreFooter2");
+    var background2Alt = settings?.Value<string>("backgroundImage2Alt") ?? "";
+
+    var picture = settings?.Value<IPublishedContent>("mainPicturePreFooter");
+    var backgroundColor = settings?.Value<ColorPickerValueConverter.PickedColor>("backgroundColorPreFooter")?.Label.ToLower() ?? null;
+    var backgroundColorClass = (!string.IsNullOrEmpty(backgroundColor) && backgroundColor != "none") ? $"bg-{backgroundColor}" : "";
+    var header = settings?.Value<string>("preFooterHeader") ?? "";
 }
 
-
-<div id="prefooter" class="bg-@backgroundColor">
+<div id="prefooter" class="bg-@backgroundColorClass">
     <div class="container">
         <div class="left-pictures">
-            <div class="background-image1">@backgroundImage1</div>
-            <div class="background-image2">@backgroundImage2</div>
-            <div class="picture">@picture</div>
+            <div class="background-image1" style="background-image: url('@backgroundImage1');"></div>
+            <div class="background-image2" style="background-image: url('@backgroundImage2');"></div>
+            <div class="picture" style="background-image: url('@picture');"></div>
         </div>
         <div class="row">
             <div class="col-md-6">
