@@ -1,0 +1,37 @@
+﻿
+$border-color: var(--color-gray);
+$padding: 20px;
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.page-content {
+    flex: 1;
+    padding: $padding;
+}
+
+.aside-right {
+    width: 25%;
+    padding: $padding;
+    border-left: 1px solid $border-color;
+}
+
+.aside-left {
+    width: 25%;
+    padding: $padding;
+    border-right: 1px solid $border-color;
+}
+
+.recent-projects,
+.tags,
+.contact {
+    margin-bottom: $padding;
+}
+
+.container::after {
+    content: "";
+    display: table;
+    clear: both;
+}

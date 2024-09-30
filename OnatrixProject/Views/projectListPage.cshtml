@@ -1,0 +1,99 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@inject Umbraco.Cms.Web.Common.UmbracoHelper UmbracoHelper
+@using Umbraco.Cms.Core
+@using Umbraco.Cms.Core.Models.PublishedContent
+
+@{
+    Layout = "mainLayout.cshtml";
+    ViewBag.Title = Model?.Name("pageTitle") ?? null;
+
+	var selection = Umbraco.Content(Guid.Parse("b0ed4074-a79a-4f4a-8046-7f7cd1ce46df")).ChildrenOfType("projectItemTemplate").Where(x => x.IsVisible());
+
+    var itemsPerPage = 4;
+    if (!int.TryParse(Context.Request.Query["page"], out int currentPage))
+        currentPage = 1;
+    
+    var totalItems = selection?.Count() ?? 0;
+    var pagedItems = selection?.Skip((currentPage - 1 ) * itemsPerPage).Take(itemsPerPage);
+}
+
+
+<section id="our-projects">
+    <div class="container">
+        @if(!string.IsNullOrEmpty(Model.Value("customHeadline").ToString())) 
+        {
+            <div class="headline">
+                <h2 class="title">@Model.Value("customHeadline")</h2>
+            </div>
+        }
+        <div class="projects">
+        @if (pagedItems != null) 
+        {
+             @foreach (var item in pagedItems) 
+            {
+                var image = item?.Value<IPublishedContent>("thumbnailImage")?.Url() ?? "";
+                var preamble = item?.Value<string>("projectDescription") ?? "";
+				var date = item?.Value<string>("projectDate") ?? "";
+
+                <a href="@item.Url()">
+                    <div class="item">
+                        <div class="header">
+                            <h4>@item.Name()</h4>
+                        </div class="date">
+						<div>
+
+						</div>
+                        <div class="body">
+                            <img src="@image" alt="@item.Name()">
+                        </div>
+                        <div class="footer">
+                            <p>@preamble</p>
+                        </div>
+                    </div>
+                </a>
+            }
+        }
+        </div>
+
+        <section class="pagination">
+            <div class="container">
+                @if (currentPage > 1)
+                {
+                    <a href="?page=@(currentPage - 1)" class="change">PREV</a>
+                }
+                else
+                {
+                    <span class="change inactive">PREV</span>
+                }
+
+                <ul class="pages">
+                 @for (int i = 1; i <= Math.Ceiling((decimal)totalItems / itemsPerPage); i++)
+                    {
+                        <li class="@((i == currentPage) ? "number active" : "number")">
+                            <a href="?page=@i">@i</a>
+                        </li>
+                    }
+                </ul>
+                @if (currentPage < Math.Ceiling((decimal)totalItems / itemsPerPage))
+                {
+                    <a href="?page=@(currentPage + 1)" class="change">NEXT</a>
+                }
+                else
+                {
+                    <span class="change inactive">NEXT</span>
+                }
+
+            </div>
+        </section>
+        <aside class="aside-right">
+            <div class="tags">
+                @await Html.PartialAsync("Partials/static/tags.cshtml")
+            </div>
+            <div class="contact">
+                <!-- Contact content here -->
+            </div>
+        </aside>
+    </div>
+</section>
+

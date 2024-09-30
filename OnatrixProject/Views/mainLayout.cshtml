@@ -1,0 +1,50 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@inject Umbraco.Cms.Web.Common.UmbracoHelper UmbracoHelper
+
+@{
+    Layout = null;
+
+
+    var rootContents = UmbracoHelper.ContentAtRoot();
+    var settings = rootContents.FirstOrDefault(x => x.ContentType.Alias == "settingsPage") ?? null;
+    var siteName = settings?.Value<string>("siteName") ?? "Onatrix";
+    var siteTagLine = settings?.Value<string>("siteTagLine") ?? "Financial Solutions";
+    var pageTitle = !string.IsNullOrEmpty(ViewBag?.Title) ? $"{ViewBag?.pageTitle} {siteName} - {siteTagLine}" : $"{siteName} - {siteTagLine}";
+    var breadTitle = ViewBag.Title = Model?.Value("pageTitle") ?? null;
+    var favIcon = settings?.Value<IPublishedContent>("siteIcon")?.Url() ?? Url.Content("~/wwwroot/media/vector.svg");
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://kit.fontawesome.com/a576612222.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="~/css/main.css" asp-append-version="true">
+    <link rel="stylesheet" href="~/css/theme.css" asp-append-version="true">
+    <link rel="icon" href="@favIcon" type="image/svg+xml" />
+    <title>@pageTitle</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        @await Html.PartialAsync("Partials/static/topbar.cshtml")
+        <header>@await Html.PartialAsync("Partials/static/header.cshtml")</header>
+        <main>
+            @if (!string.IsNullOrEmpty(@breadTitle))
+            {
+                @await Html.PartialAsync("partials/static/breadcrumb.cshtml")
+            }
+            @RenderBody()
+            @if (pageTitle != "Onatrix Inc. - Providing Your Financial Solutions!")
+            {
+                @await Html.PartialAsync("partials/static/yourNextProject.cshtml")
+            }
+        </main>
+        <footer>@await Html.PartialAsync("partials/static/footer.cshtml")</footer>
+    </div>
+    <script src="/scripts/main.js"></script>
+</body>
+</html>
+

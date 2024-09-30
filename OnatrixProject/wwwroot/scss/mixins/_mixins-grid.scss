@@ -1,0 +1,32 @@
+@mixin grid {
+    display: grid;
+    align-items: center;
+    grid-template-columns: repeat(1, 1fr);
+    grid-gap: 20px;
+}
+
+ @mixin grid-2 {
+    display: grid;
+    align-items: center;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 20px;
+}
+
+@mixin grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+ }
+
+@mixin grid-4 {
+    display: grid;
+    align-items: center;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 20px;
+ }
+
+ @mixin grid-5 {
+    display: grid;
+    align-items: center;
+    grid-template-columns: repeat(5, 1fr);
+ }

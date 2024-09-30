@@ -1,0 +1,31 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@inject Umbraco.Cms.Web.Common.UmbracoHelper UmbracoHelper
+
+@{
+    var rootContents = UmbracoHelper.ContentAtRoot();
+    var settings = rootContents.FirstOrDefault(x => x.ContentType.Alias == "settingsPage") ?? null;
+    var tag1 = settings?.Value<string>("tag1");
+    var tag2 = settings?.Value<string>("tag2");
+    var tag3 = settings?.Value<string>("tag3");
+    var tag4 = settings?.Value<string>("tag4");
+    var tag5 = settings?.Value<string>("tag5");
+    var tag6 = settings?.Value<string>("tag6");
+    var tag7 = settings?.Value<string>("tag7");
+    var tag8 = settings?.Value<string>("tag8");
+}
+
+<section class="tags">
+    <div class="container">
+        <h4>Tags</h4>
+        <div class="tag-row">
+        <p class="tag">@tag1</p>
+        <p class="tag">@tag2</p>
+        <p class="tag">@tag3</p>
+        <p class="tag">@tag4</p>
+        <p class="tag">@tag5</p>
+        <p class="tag">@tag6</p>
+        <p class="tag">@tag7</p>
+        <p class="tag">@tag8</p>
+    </div>
+</section>

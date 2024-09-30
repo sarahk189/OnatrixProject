@@ -1,0 +1,67 @@
+#why-choose-us {
+    height: 75em;
+    position: relative;
+
+
+    .container {
+        text-align: center;
+        padding-top: 10vh;
+        position: relative; 
+
+        img {
+            padding-top: 8vh;
+            width: 100%; 
+            height: auto; 
+            z-index: -1; 
+            display: block; 
+            position: relative; 
+        }
+
+        .umb-block-grid__area {
+            display: flex;
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            width: 100%;
+            z-index: 1; 
+            margin-top: 10px;
+            align-items: center;
+            justify-content: center;   
+        }
+
+        h2 {
+            margin: 0; 
+            padding: 1rem; 
+        }
+
+        h3 {
+            font-size: 40px;
+        }
+
+        p {
+            margin: 2rem 5rem; 
+            padding: 0.5rem; 
+            width: 60%;
+            text-align: center;
+        }
+
+        .btn {
+            margin-top: 1rem; 
+        }
+
+        img:nth-of-type(2) {
+            position: absolute;
+            opacity: 0 !important;
+            transform: translateY(100%) ip !important;
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out !important;
+        }
+
+        &.in-view {
+            img:nth-of-type(2) {
+                opacity: 1 ipo !important;
+                transform: translateY(0) !important;
+            }
+        }
+    }
+}
+

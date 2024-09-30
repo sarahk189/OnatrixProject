@@ -1,0 +1,49 @@
+@mixin mobile {
+    @media (max-width: 767px) {
+        @content;
+    }
+}
+
+@mixin tablet {
+    @media (min-width: 768px) and (max-width: 1024px) {
+        @content;
+    }
+}
+
+@mixin desktop {
+    @media (min-width: 1025px) {
+        @content;
+    }
+}
+
+@mixin lg-desktop {
+    @media (min-width: 1441px) {
+        @content;
+    }
+}
+
+@mixin xl-desktop {
+    @media (min-width: 1921px) {
+        @content;
+    }
+}
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-gap: 20px;
+
+    @include tablet {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    @include desktop {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    @include lg-desktop {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    @include xl-desktop {
+        grid-template-columns: repeat(5, 1fr);
+    }
+}
+

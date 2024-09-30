@@ -1,0 +1,44 @@
+$border-color: var(--color-gray);
+$padding: 20px;
+
+.projects {
+    .item {
+        display: flex;
+        align-items: center;
+        padding: $padding 0;
+        border-bottom: 1px solid $border-color;
+
+        &:last-child {
+            border-bottom: none;
+        }
+
+        .image {
+            flex: 0 0 80px; 
+            margin-right: $padding;
+
+            img {
+                max-width: 100%;
+                height: auto;
+                display: block;
+            }
+        }
+
+        .item-text {
+            display: flex;
+            flex-direction: column;
+
+            .header {
+                h4 {
+                    margin: 0;
+                    font-size: 1.2em; 
+                }
+            }
+    
+            .date {
+                color: var(--color-gray);
+                font-size: 0.9em; 
+                margin-top: 5px;
+            }
+        }
+    }
+}

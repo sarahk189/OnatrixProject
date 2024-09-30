@@ -1,0 +1,41 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@inject Umbraco.Cms.Web.Common.UmbracoHelper UmbracoHelper
+@{
+    var rootContents = UmbracoHelper.ContentAtRoot();
+    var settings = rootContents.FirstOrDefault(x => x.ContentType.Alias == "settingsPage") ?? null;
+    var socialMediaPlatforms = settings?.Value<IEnumerable<Umbraco.Cms.Core.Models.Blocks.BlockListItem>>("socialMediaPlatforms") ?? null;
+}
+
+@if (socialMediaPlatforms != null)
+{
+    <div class="social-media">
+        @foreach (var social in socialMediaPlatforms)
+        {
+            var platformName = social?.Content?.Value<string>("platformName");
+            var platformAccountUrl = social?.Content?.Value<string>("platformAccountUrl") ?? "#";
+
+            switch (platformName?.ToLower())
+            {
+                case "facebook":
+                    <a href="@platformAccountUrl" target="_blank" class="facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                    break;
+                case "instagram":
+                    <a href="@platformAccountUrl" target="_blank" class="instagram"><i class="fa-brands fa-instagram"></i></a>
+                    break;
+                case "linkedin":
+                    <a href="@platformAccountUrl" target="_blank" class="linkedin"><i class="fa-brands fa-linkedin"></i></a>
+                    break;
+                case "tiktok":
+                    <a href="@platformAccountUrl" target="_blank" class="tiktok"><i class="fa-brands fa-tiktok"></i></a>
+                    break;
+                case "x (formerly twitter)":
+                    <a href="@platformAccountUrl" target="_blank" class="twitter"><i class="fa-brands fa-x-twitter"></i></a>
+                    break;
+                case "youtube":
+                    <a href="@platformAccountUrl" target="_blank" class="youtube"><i class="fab fa-youtube"></i></a>
+                    break;
+            }
+        }
+    </div>
+}

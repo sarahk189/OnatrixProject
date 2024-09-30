@@ -1,0 +1,32 @@
+.container {
+    position: relative;
+    padding-right: 1rem !important;
+    padding-left: 1rem !important;
+    margin-left: auto;
+    margin-right: auto;
+
+    @include tablet {
+        max-width: 768px;
+    }
+
+    @include desktop {
+        max-width: 900px;
+    }
+
+    @include lg-desktop {
+        max-width: 1170px;
+    }
+
+    @include xl-desktop {
+        max-width: 1320px;
+    }
+}
+
+.container-fluid {
+    position: relative;
+    width: 100%;
+    padding-right: 1rem !important;
+    padding-left: 1rem !important;
+    margin-right: auto;
+    margin-left: auto;
+}

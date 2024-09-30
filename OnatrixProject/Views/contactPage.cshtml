@@ -1,0 +1,29 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.Contact>;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+
+@{
+    Layout = "mainLayout.cshtml";
+    ViewBag.Title = Model.Value("pageTitle");
+
+    bool.TryParse(TempData["error_name"]?.ToString()!, out bool error_name);
+    bool.TryParse(TempData["error_email"]?.ToString()!, out bool error_email);
+    bool.TryParse(TempData["error_message"]?.ToString()!, out bool error_message);
+}
+<div class="container">
+    <h1>@ViewBag.Title</h1>
+    <div class="container">
+
+        @using (Html.BeginUmbracoForm("HandleSubmit", "ContactSurface", FormMethod.Post))
+        {
+            @Html.GetBlockListHtml(Model.ContactForm)
+        }
+
+        @if (TempData["success"] != null)
+        {
+                <div class="alert alert-success" role="alert">
+                @TempData["success"]
+                </div>
+        }
+    </div>
+</div>

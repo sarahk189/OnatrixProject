@@ -1,0 +1,18 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@using Umbraco.Cms.Core.PropertyEditors.ValueConverters;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>;
+
+@{
+    var linkText = Model?.Content.Value<string>("linkText");
+    var linkUrl = Model?.Content.Value<string>("linkUrl");
+    var isExternal = Model?.Content.Value<bool>("isExternal");
+}
+
+@if (isExternal == true)
+{
+    <a href="@linkUrl" title="@linkText" target="_blank">@linkText</a>
+}
+else
+{
+    <a href="@linkUrl" title="@linkText" class="btn">@linkText</a>
+}

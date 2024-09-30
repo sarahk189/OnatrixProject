@@ -1,0 +1,47 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@using Umbraco.Cms.Core.Routing
+@using Umbraco.Extensions
+@inject Umbraco.Cms.Web.Common.UmbracoHelper UmbracoHelper
+@using Umbraco.Cms.Core
+@using Umbraco.Cms.Core.Models.PublishedContent;
+
+@inject IPublishedUrlProvider PublishedUrlProvider
+
+@{
+    var selection = Model.Ancestors().ToArray();
+    var homePageDisplayName = "Home";
+    var isFirstItem = true;
+    var isHomePage = Model.ContentType.Alias == "Home";
+    var rootContents = UmbracoHelper.ContentAtRoot();
+    var settings = rootContents.FirstOrDefault(x => x.ContentType.Alias == "settingsPage") ?? null;
+    var backgroundPicture1 = settings?.Value<IPublishedContent>("backgroundPicture1")?.Url() ?? "";
+    var backgroundPicture2 = settings?.Value<IPublishedContent>("backgroundPicture2")?.Url() ?? "";
+    var backgroundColor = settings?.Value<string>("backgroundColor") ?? "";
+}
+
+<section class="page-title" style="background-color: @backgroundColor;">
+    <div class="container">
+        <h1>@ViewBag.Title</h1>
+
+        @if (selection?.Length > 0)
+        {
+            <ul class="breadcrumb">
+                @foreach (var item in selection.OrderBy(x => x.Level))
+                {
+                    var displayName = isFirstItem ? homePageDisplayName : item.Name;
+                    <li><a href="@item.Url(PublishedUrlProvider)">@displayName</a></li>
+                    isFirstItem = false;
+                }
+                <li class="active">@Model.Name</li>
+            </ul>
+        }
+    </div>
+    @if (!string.IsNullOrEmpty(backgroundPicture1))
+    {
+        <div class="background-picture background-picture1" style="background-image: url('@backgroundPicture1');"></div>
+    }
+    @if (!string.IsNullOrEmpty(backgroundPicture2))
+    {
+        <div class="background-picture background-picture2" style="background-image: url('@backgroundPicture2');"></div>
+    }
+</section>

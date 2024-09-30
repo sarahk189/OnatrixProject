@@ -1,0 +1,71 @@
+@import '../mixins/_mixins-media.scss';
+@import '../mixins/_mixins-typography.scss'; 
+
+#about-us.spacingBottomClass {
+    .container {
+        padding: 20rem;
+
+        // @include mobile {
+        //     padding: 20px;
+        // }
+
+        // @include tablet {
+        //     padding: 30px;
+        // }
+
+        // @include desktop {
+        //     padding: 50px;
+        // }
+    
+
+        .umb-block-grid__layout-container   {
+            display: flex;
+            flex-direction: column;
+            width: 45vh;
+
+            @include tablet {
+                flex-direction: row;
+            }
+
+            .p {
+                flex: 1;
+                padding: 1rem;
+
+                @include mobile {
+                    padding: 0.5rem;
+                }
+
+                @include tablet {
+                    padding: 1rem;
+                }
+
+                @include desktop {
+                    padding: 1.5rem;
+                }
+            }
+
+            img {
+                flex: 1;
+                padding: 1rem 0;
+
+                @include mobile {
+                    padding: 0.5rem 0;
+                }
+
+                @include tablet {
+                    padding: 1rem 0;
+                }
+
+                @include desktop {
+                    padding: 1.5rem 0;
+                }
+            }
+
+            .umb-block-grid__layout-item[data-content-element-type-alias="quotation"] {
+                blockquote {
+                    @include blockquote;
+                }
+            }
+        }
+    }
+}

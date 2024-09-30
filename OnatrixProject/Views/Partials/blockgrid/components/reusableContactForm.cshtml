@@ -1,0 +1,36 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+
+@{
+    var formHeadline = Model.Content.Value<string>("formHeadline");
+    var formParagraph = Model.Content.Value<string>("formParagraph");
+    var contactForm = Model.Content.Value<global::Umbraco.Cms.Core.Models.Blocks.BlockListModel>("reusableForm");
+}
+
+<div class="container">
+    @if (contactForm != null)
+    {
+        <h2>@formHeadline</h2>
+        <p>@formParagraph</p>
+        @using (Html.BeginUmbracoForm("HandleSubmit", "ContactSurface", FormMethod.Post))
+        {
+            @Html.GetBlockListHtml(contactForm)
+        }
+    }
+    else
+    {
+        <p>Contact form is null.</p>
+    }
+
+    @if (TempData["success"] != null)
+    {
+        <div class="alert alert-success" role="alert">
+            @TempData["success"]
+        </div>
+    }
+    else
+    {
+        <p>No success message.</p>
+    }
+</div>

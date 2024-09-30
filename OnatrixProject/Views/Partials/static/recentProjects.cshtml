@@ -1,0 +1,48 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@inject Umbraco.Cms.Web.Common.UmbracoHelper UmbracoHelper
+@using Umbraco.Cms.Core
+@using Umbraco.Cms.Core.Models.PublishedContent
+
+@{
+    ViewBag.Title = Model?.Name("pageTitle") ?? null;
+
+    var selection = Umbraco.Content(Guid.Parse("b0ed4074-a79a-4f4a-8046-7f7cd1ce46df")).ChildrenOfType("projectItemTemplate").Where(x => x.IsVisible());
+
+    var itemsPerPage = 4;
+    if (!int.TryParse(Context.Request.Query["page"], out int currentPage))
+        currentPage = 1;
+
+    var totalItems = selection?.Count() ?? 0;
+    var pagedItems = selection?.Skip((currentPage - 1) * itemsPerPage).Take(itemsPerPage);
+}
+
+ <div class="projects">
+ <h4>Recent Projects</h4>
+    @if (pagedItems != null) 
+    {
+        @foreach (var item in pagedItems) 
+        {
+            var image = item?.Value<IPublishedContent>("thumbnailImage")?.Url() ?? "";
+            var preamble = item?.Value<string>("projectDescription") ?? "";
+            var date = item?.Value<string>("projectDate") ?? "";
+
+            <a href="@item.Url()">
+                <div class="item">
+                    <div class="image">
+                        <img src="@image" alt="@item.Name()">
+                    </div>
+                    <div class="item-text">
+                        <div class="header">
+                            <h4>@item.Name()</h4>
+                        </div>
+                        <div class="date">
+                            <div><i class="fa-sharp fa-solid fa-calendar-days"></i> @date</div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </a>
+        }
+    }
+</div>

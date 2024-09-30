@@ -1,0 +1,74 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Content Remove="compilerconfig.json" />
+		<Content Remove="sassconfig.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Content Include="wwwroot\media\24ibjeyg\brandon-karr.png" />
+		<Content Include="wwwroot\media\410joxav\aj.png" />
+		<Content Include="wwwroot\media\5bjgz3lj\miranda.png" />
+		<Content Include="wwwroot\media\5jogstcx\sl-home.png" />
+		<Content Include="wwwroot\media\h52j0fzk\tina.png" />
+		<Content Include="wwwroot\media\jkoes4jr\kevin-gardner-1.png" />
+		<Content Include="wwwroot\media\r35ne4p0\aaron.png" />
+		<Content Include="wwwroot\media\tspk13oq\brandon.png" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="compilerconfig.json" />
+		<None Include="sassconfig.json" />
+		<None Include="Views\Partials\blockgrid\area.cshtml" />
+		<None Include="Views\Partials\blockgrid\areas.cshtml" />
+		<None Include="Views\Partials\blockgrid\default.cshtml" />
+		<None Include="Views\Partials\blockgrid\items.cshtml" />
+		<None Include="Views\Partials\blocklist\default.cshtml" />
+		<None Include="wwwroot\media\0c2cw3fo\brand.svg" />
+		<None Include="wwwroot\media\ceeb5xtd\vector.svg" />
+		<None Include="wwwroot\media\evsbybmc\logo.svg" />
+		<None Include="wwwroot\media\olqnsabm\onlinesignaturesnet-302-1.svg" />
+		<None Include="wwwroot\media\Vector.svg" />
+		<None Include="wwwroot\media\x1hbwt3y\brand.svg" />
+		<None Include="wwwroot\media\xbtbmhpj\logo.svg" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Umbraco.Cms" Version="14.2.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<!-- Opt-in to app-local ICU to ensure consistent globalization APIs across different platforms -->
+		<PackageReference Include="Microsoft.ICU.ICU4C.Runtime" Version="72.1.0.3" />
+		<RuntimeHostConfigurationOption Include="System.Globalization.AppLocalIcu" Value="72.1.0.3" Condition="$(RuntimeIdentifier.StartsWith('linux')) or $(RuntimeIdentifier.StartsWith('win')) or ('$(RuntimeIdentifier)' == '' and !$([MSBuild]::IsOSPlatform('osx')))" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Folder Include="umbraco\" />
+		<Folder Include="Views\Partials\static\" />
+		<Folder Include="wwwroot\scss\colours\sections\" />
+		<Folder Include="wwwroot\scss\misc\NewFolder\" />
+	</ItemGroup>
+
+	<PropertyGroup>
+		<!-- Razor files are needed for the backoffice to work correctly -->
+		<CopyRazorGenerateFilesToPublishDirectory>true</CopyRazorGenerateFilesToPublishDirectory>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<!-- Remove RazorCompileOnBuild and RazorCompileOnPublish when not using ModelsMode InMemoryAuto -->
+		<RazorCompileOnBuild>false</RazorCompileOnBuild>
+		<RazorCompileOnPublish>false</RazorCompileOnPublish>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<!-- Ensure reference assemblies are copied to the publish directory -->
+		<CopyRefAssembliesToPublishDirectory>true</CopyRefAssembliesToPublishDirectory>
+	</PropertyGroup>
+
+</Project>

@@ -1,0 +1,12 @@
+﻿@using OnatrixProject.Models;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.ModularPage>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+    Layout = "mainLayout.cshtml";
+    var pageTitle = ViewBag.Title = Model?.Value("pageTitle") ?? null;
+}
+
+
+
+@await Html.GetBlockGridHtmlAsync(Model?.Layout)
+

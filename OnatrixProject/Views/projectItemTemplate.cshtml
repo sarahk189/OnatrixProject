@@ -1,0 +1,25 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@{
+    Layout = "~/Views/mainLayout.cshtml";
+    ViewBag.Title = Model?.Name ?? "model name not working";
+}
+
+<section class="project-details">
+    <div class="container">
+        <div class="page-content">
+            @Model?.Value("pageContent")
+        </div>
+        <aside class="aside-right">
+            <div class="recent-projects">
+                @await Html.PartialAsync("Partials/static/recentProjects.cshtml")
+            </div>
+            <div class="tags">
+                @await Html.PartialAsync("Partials/static/tags.cshtml")
+            </div>
+            <div class="contact">
+                <!-- Contact content here -->
+            </div>
+        </aside>
+    </div>
+</section>

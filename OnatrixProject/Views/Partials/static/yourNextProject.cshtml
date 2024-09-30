@@ -1,0 +1,47 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@inject Umbraco.Cms.Web.Common.UmbracoHelper UmbracoHelper
+
+@{
+    var rootContents = UmbracoHelper.ContentAtRoot();
+    var settings = rootContents.FirstOrDefault(x => x.ContentType.Alias == "settingsPage") ?? null;
+    var officeLocation = settings?.Value<string>("officeLocation") ?? "";
+    var officePhoneNumber = settings?.Value<string>("officePhoneNumber") ?? "";
+    var officeEmail = settings?.Value<string>("officeEmail") ?? "";
+    var backgroundImage1 = settings?.Value<IPublishedContent>("backgroundImagePreFooter1") ?? null;
+    var backgroundImage2 = settings?.Value<IPublishedContent>("backgroundImagePreFooter2") ?? null;
+    var backgroundColor = settings?.Value<string>("backgroundColorPreFooter") ?? "";
+    var picture = settings?.Value<IPublishedContent>("mainPicturePreFooter") ?? null;
+    var header = settings?.Value<string>("preFooterHeader") ?? "";
+
+}
+
+
+<div id="prefooter" class="bg-@backgroundColor">
+    <div class="container">
+        <div class="left-pictures">
+            <div class="background-image1">@backgroundImage1</div>
+            <div class="background-image2">@backgroundImage2</div>
+            <div class="picture">@picture</div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="prefooter-content">
+                    <h2>@header</h2>
+                    <div class="office-location">
+                        <p>Office location</p>
+                        <p>@officeLocation</p>
+                    </div>
+                    <div class="office-phone">
+                        <p>Phone Number</p>
+                        <p>@officePhoneNumber</p>
+                    </div>
+                    <div class="office-email">
+                        <p>E-mail Address</p>
+                        <p>@officeEmail</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
