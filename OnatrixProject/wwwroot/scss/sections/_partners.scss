@@ -1,23 +1,47 @@
 
+@import '../mixins/_mixins-media.scss';
+
 .partners {
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    height: 100%; 
+
     .container {
+        display: flex;
+        justify-content: center; 
+        align-items: center; 
+        width: 100%; 
 
         .image-slider {
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            justify-content: center; 
             gap: 1rem;
+
+            @include mobile {
+                flex-direction: column;
+            }
 
             .slides {
                 display: flex;
                 align-items: center;
+                justify-content: center; 
                 gap: 1rem;
+
+                @include mobile {
+                    flex-direction: column;
+                }
 
                 .slide-item {
                     flex: 0 0 20%;
                     padding: 1em;
                     scroll-snap-align: start;
                     cursor: pointer;
+
+                    @include mobile {
+                        flex: 0 0 100%;
+                    }
 
                     img {
                         width: 100%;
@@ -33,4 +57,3 @@
         }
     }
 }
-

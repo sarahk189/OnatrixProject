@@ -1,46 +1,176 @@
 #prefooter {
-    padding: 20px 0;
-    background-color: var(--color-background); // Adjust as needed
+    height: 35rem;
+    width: 100%;
+    overflow: hidden;
 
     .container {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
+        display: flex !important;
+        padding: 40px;
+        height: auto;
 
-    .left-pictures {
-        display: flex;
-        flex-direction: column;
-        gap: 10px; // Space between images
+        .left-pictures {
+            position: relative;
+            flex: 1;
+            align-items: center;
+            width: 200px;
 
-        .background-image1,
-        .background-image2,
-        .picture {
-            width: 100px; // Adjust size as needed
-            height: 100px; // Adjust size as needed
-            background-size: cover;
-            background-position: center;
+            .background-image1,
+            .background-image2,
+            .picture {
+                width: 100%;
+                height: auto;
+                background-size: cover;
+                background-position: center;
+                position: absolute;
+            }
+
+            .background-image1 {
+                z-index: 1;
+                top: 0px;
+                left: 300px;
+                width: 30%;
+            }
+
+            .background-image2 {
+                z-index: 2;
+                top: 135px;
+                left: 30px;
+                width: 100%;
+            }
+
+            .picture {
+                z-index: 3;
+                top: 10px;
+                left: 40px;
+                width: 65%;
+            }
+
+            img {
+                width: 100%;
+                height: auto;
+            }
+        }
+
+        .row {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            color: var(--color-primary);
+
+            .prefooter-content {
+                z-index: 5;
+                position: relative;
+                top: 10em;
+                left: 2em;
+
+                h2 {
+                    margin-bottom: 20px;
+                    font-size: 1.5rem;
+                    z-index: 10;
+                }
+
+                .office-location,
+                .office-phone,
+                .office-email {
+                    margin-bottom: 10px;
+                    z-index: 10;
+
+                    .text-header {
+                        display: flex;
+                        align-items: center !important;
+                        font-weight: bold;
+
+                        i {
+                            color: var(--color-secondary);
+                            margin-right: 10px; 
+                            margin-left: -20px; 
+                        }
+
+                        h6 {
+                            color: var(--color-primary);
+                            font-size: 1rem;
+                            padding-top: 5px;
+                        }
+                    }
+                }
+            }
         }
     }
 
-    .row {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
+    @include mobile {
+        height: auto;
 
-        .prefooter-content {
-            h2 {
-                margin-bottom: 20px;
-                font-size: 1.5rem; // Adjust as needed
+        .container {
+            flex-direction: column;
+            padding: 20px;
+
+            .left-pictures {
+                display: none;
             }
 
-            .office-location,
-            .office-phone,
-            .office-email {
-                margin-bottom: 10px;
+            .row {
+                align-items: center; 
 
-                p:first-child {
-                    font-weight: bold;
+                .prefooter-content {
+                    top: 0;
+                    text-align: center; 
+                    
+                    h2 {
+                        font-size: 1.2rem;
+                    }
+
+                    .office-location,
+                    .office-phone,
+                    .office-email {
+                        .text-header {
+                            justify-content: center; 
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @include tablet {
+        height: auto;
+
+        .container {
+            flex-direction: column;
+            padding: 30px;
+
+            .left-pictures {
+                display: none;
+            }
+
+            .row {
+                align-items: center; 
+
+                .prefooter-content {
+                    top: 0;
+                    text-align: center; 
+                    
+                    h2 {
+                        font-size: 1.3rem;
+                    }
+
+                    .office-location,
+                    .office-phone,
+                    .office-email {
+                        .text-header {
+                            justify-content: center; 
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @include desktop {
+        .container {
+            .row {
+                .prefooter-content {
+                    top: 5em;
                 }
             }
         }

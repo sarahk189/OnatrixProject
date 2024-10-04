@@ -1,0 +1,100 @@
+﻿#professionals {
+    padding: 20px;
+    position: relative;
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .profs-headline {
+        text-align: center;
+        margin-bottom: 20px;
+        margin-top: 7%; 
+
+        .section-title {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+
+        .title {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+    }
+
+    .professionals-list {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: auto auto;
+        gap: 20px;
+        width: 100%;
+        justify-content: center;
+        align-content: center;
+
+        .proffesional-single {
+            border: 1px solid var(--color-primary-light);
+            border-radius: 5px;
+            padding: 20px;
+            text-align: center;
+            box-sizing: border-box;
+            width: 100%;
+            height: 100%;
+            text-decoration: none;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+            &:hover {
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+                transform: translateY(-5px);
+
+                img {
+                    transform: scale(1.1);
+                }
+            }
+
+            img {
+                max-width: 100%;
+                height: auto;
+                margin-bottom: 10px;
+                transition: transform 0.3s ease;
+            }
+
+            .prof-name {
+                h4 {
+                    font-size: 1.2em;
+                    margin-bottom: 5px;
+                    margin-top: 5%;
+                }
+            }
+
+            .prof-prof {
+                p {
+                    font-size: 1em;
+                    margin-bottom: 0;
+                    color: var(--color-primary);
+                    text-decoration: none;
+                }
+            }
+        }
+
+        &:nth-child(4) {
+            grid-column: span 3;
+        }
+    }
+
+    @include mobile {
+        .professionals-list {
+            grid-template-columns: 1fr;
+            gap: 10px;
+        }
+    }
+
+    @include tablet {
+        .professionals-list {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+    }
+}

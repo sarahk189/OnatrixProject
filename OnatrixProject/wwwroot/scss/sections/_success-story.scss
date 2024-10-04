@@ -1,87 +1,105 @@
+@import "../../scss/mixins/_mixins-media.scss";
+
 #success-story {
-    z-index: 1; 
-    background-color: var(--color-primary);
-    height: fit-content;
-    align-items: center;
+    position: relative;
+    padding-top: 2rem;
+    align-content: center;
     display: flex;
-    flex-direction: column; 
-    justify-content: flex-start; 
-    padding-top: 1rem; 
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    overflow: hidden; 
 
-    .container:nth-of-type(1) {
-        display: flex;
-        flex-direction: column;
-        align-items: center !important;
+
+    .background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        align-items: center;
+    }
+
+    img.background-image {
         position: relative;
-        text-align: center;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        margin-top: 2em;
+        margin-bottom: 2em;
 
-        img {
-            z-index: -1;
-            padding-top: 8vh;
-            width: auto;
+        @include mobile {
+            display: none;
         }
 
-        h6, h3 {
-            text-align: center;
-            z-index: 2;
-            margin: 0;
-            padding: 0.5rem;
-            color: var(--color-secondary);
-            position: absolute;
-            top: 10vh;
-        }
-        h3 {
-            color: var(--color-light);
-            top: 13vh; 
+        @include tablet {
+            display: none;
         }
     }
 
-    .container:nth-of-type(2) {
-        // container 2
-        z-index: 50;
-        border: 1px solid var(--color-secondary);
+    h6, h3 {
+        text-align: center;
+        z-index: 2;
+        margin: 0;
+        padding: 0.5rem;
+        color: var(--color-secondary);
+        position: absolute;
+        top: 10%;
+        left: 50%;
+        transform: translateX(-50%);
+
+        @include mobile {
+            font-size: 1rem;
+            top: 5%;
+        }
+    }
+
+    h3 {
+        color: var(--color-light);
+        top: 13%;
+
+        @include mobile {
+            font-size: 1.5rem;
+            top: 15%;
+        }
+    }
+
+    .success-story-numbers {
         display: flex;
         align-items: center;
-        justify-content: space-between;
-        gap: 0.5rem; 
-        flex-direction: row;
-        flex: 1; 
-        width: 100%; 
-        background-color: var(--color-light);
+        justify-content: center;
+        z-index: 3;
+        position: relative;
+        top: -35rem;
 
-        .umb-block-grid__layout-item {
-            // dynamic containers
-            z-index: 3;
-            border: 1px solid black;
-            display: flex;
-            flex-direction: column;
+
+        .success-number-box {
+            text-align: center;
+            width: 20%;
             align-items: center;
-            justify-content: center;
-            flex: 1;
+            margin: 0 2rem;
 
             h1 {
                 margin: 0;
-                padding: 0.5rem;
                 color: var(--color-secondary);
+
+                @include mobile {
+                    font-size: 1.5rem;
+                }
             }
 
             p {
-                color: black;
+                margin: 0;
+                color: var(--color-light);
+
+                @include mobile {
+                    font-size: 1rem;
+                }
             }
-        }
-    }
-
-    .container:nth-of-type(3) { 
-        // container 3
-        z-index: 4;
-        border: 1px solid var(--color-secondary);
-        display: flex;
-        align-items: center;
-        justify-content: center; 
-        flex: 1; 
-
-        img:nth-of-type(2) {
-            width: auto;
         }
     }
 }

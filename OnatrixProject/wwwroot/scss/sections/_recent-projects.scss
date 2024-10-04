@@ -1,3 +1,5 @@
+@import '../mixins/_mixins-media.scss';
+
 $border-color: var(--color-border-gray);
 $padding: 20px;
 
@@ -8,13 +10,23 @@ $padding: 20px;
         padding: $padding 0;
         border-bottom: 1px solid $border-color;
 
+        @include mobile {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
         &:last-child {
             border-bottom: none;
         }
 
         .image {
-            flex: 0 0 80px; 
+            flex: 0 0 80px;
             margin-right: $padding;
+
+            @include mobile {
+                margin-right: 0;
+                margin-bottom: $padding;
+            }
 
             img {
                 max-width: 100%;
@@ -31,16 +43,24 @@ $padding: 20px;
             .header {
                 h4 {
                     margin: 0;
-                    font-size: 1.2em; 
+                    font-size: 1.2em;
                     text-decoration: none;
+
+                    @include mobile {
+                        font-size: 1rem;
+                    }
                 }
             }
-    
+
             .date {
                 color: var(--color-border-gray);
-                font-size: 0.9em; 
+                font-size: 0.9em;
                 margin-top: 5px;
                 text-decoration: none;
+
+                @include mobile {
+                    font-size: 0.8em;
+                }
             }
         }
     }

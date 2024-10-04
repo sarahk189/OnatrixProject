@@ -1,0 +1,61 @@
+﻿@* @using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@{
+	Layout = "mainLayout.cshtml";
+}
+
+
+@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@{
+	Layout = "mainLayout.cshtml";
+    ViewBag.Title = Model?.Value("pageTitle") ?? null;
+
+    // var selection = Umbraco!.Content(Guid.Parse("1621f532-a9b9-4e92-8907-0fa867697b45"))!.ChildrenOfType("projectItemTemplate")!.Where(x => x.IsVisible());
+
+    var itemsPerPage = 4;
+    if (!int.TryParse(Context.Request.Query["page"], out int currentPage))
+        currentPage = 1;
+
+    var totalItems = selection?.Count() ?? 0;
+    var pagedItems = selection?.Skip((currentPage - 1) * itemsPerPage).Take(itemsPerPage);
+    
+}
+
+@if (!string.IsNullOrEmpty(ViewBag.Title))
+{
+    @await Html.PartialAsync("partials/static/breadcrumb.cshtml")
+}
+
+
+<section id="our-experts">
+    <div class="container">
+        <div class="experts">
+            @if (pagedItems != null){
+                @foreach (var item in pagedItems) {
+
+                var image = item?.Value<IPublishedContent>("thumbnailImage")?.Url() ?? "";
+                var fullName = item?.Value<string>("fullName") ?? "";
+                var fullOccupation = item?.Value<string>("fullOccupation") ?? "";
+               
+                <a href="@item.Url()">
+                    <div class="expert-item">                      
+                        <div class="expert-body">
+                            <img src="@image" alt="item.Name">
+                        </div>
+                        <div class="text">
+                            <div class="expert-header">
+                                <h4>@item.Name()</h4>
+                            </div>  
+                            <div class="expert-footer">
+                                <p>@fullOccupation</p>
+                            </div>
+                        </div>    
+                    </div>
+                </a>
+            }
+            }          
+        </div>
+    </div>
+</section>
+ *@

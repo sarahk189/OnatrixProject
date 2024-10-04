@@ -1,0 +1,33 @@
+footer {
+    width: 100%;
+    display: flex;
+    background-color: var(--color-dark);
+    padding: 20px;
+
+    .container {
+        width: 100%;
+        display: flex;
+        align-items: center;
+    }
+
+    .copyright {
+        display: flex;
+        align-items: center;
+        width: 100%;
+    }
+
+    .copyright-information,
+    .credits {
+        margin: 0;
+    }
+
+    .copyright-information {
+        padding-right: 20px; 
+    }
+
+    .credits a {
+        margin-left: 5px;
+        color: var(--color-secondary);
+        text-decoration: none;
+    }
+}

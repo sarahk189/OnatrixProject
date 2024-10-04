@@ -25,16 +25,14 @@
                 <img src="@siteLogoType" alt="@siteName">
             </a>
         </div>
-        <div id="navbar">
-            <nav class="nav-menu">
-                @if (selection?.Length > 0)
+        <div id="navbar" class="nav-menu">
+            @if (selection?.Length > 0)
+            {
+                @foreach (var item in selection)
                 {
-                    @foreach (var item in selection)
-                    {
-                        <a class="@(item.IsAncestorOrSelf(Model) ? "nav-link active" : "nav-link")" href="@item.Url(PublishedUrlProvider, null, UrlMode.Relative)" title="@item.Name">@item.Name</a>
-                    }
+                    <a class="@(item.IsAncestorOrSelf(Model) ? "nav-link active" : "nav-link")" href="@item.Url(PublishedUrlProvider, null, UrlMode.Relative)" title="@item.Name">@item.Name</a>
                 }
-            </nav>
+            }
         </div>
         <div class="search">
             <i class="fa-solid fa-magnifying-glass"></i>

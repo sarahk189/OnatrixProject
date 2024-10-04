@@ -1,0 +1,108 @@
+﻿#great-reviews {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 20px;
+    position: relative;
+
+    .background {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+    }
+
+    .container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    .review-left, .review-right {
+        flex: 1;
+        padding: 20px;
+    }
+
+    .review-left {
+        max-width: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        h6 {
+            margin-top: 5%;
+            font-size: 1em;
+            margin-bottom: 10px;
+        }
+
+        .review-h1 {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        .review-quote {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+            color: #999999;
+            font-style: italic;
+        }
+
+        .stars {
+            margin-bottom: 20px;
+        }
+
+        .review-person {
+            font-size: .8em;
+            margin-bottom: 5px;
+        }
+
+        .review-company {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            font-style: italic;
+        }
+    }
+
+    .review-right {
+        max-width: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+
+        img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+    }
+
+    @include mobile {
+        .container {
+            flex-direction: column;
+        }
+
+        .review-left, .review-right {
+            max-width: 100%;
+        }
+
+        .review-right {
+            order: -1;
+        }
+    }
+
+    @include tablet {
+        .container {
+            flex-direction: column;
+        }
+
+        .review-left, .review-right {
+            max-width: 100%;
+        }
+
+        .review-right {
+            order: -1;
+        }
+    }
+}

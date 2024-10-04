@@ -1,0 +1,41 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@using Umbraco.Cms.Core.PropertyEditors.ValueConverters;
+
+@{
+    var reviewPic = Model?.Content.Value<IPublishedContent>("reviewPic")?.Url() ?? null;
+    var reviewPicDesc = Model?.Content.Value<string>("reviewPicDesc") ?? null;
+    var reviewH6 = Model.Content.Value<string>("reviewH6");
+    var reviewH1 = Model.Content.Value<string>("reviewH1");
+    var reviewQuote = Model.Content.Value<string>("reviewQuote");
+    var reviewPerson = Model.Content.Value<string>("reviewPerson");
+    var reviewCompnay = Model.Content.Value<string>("reviewCompnay");
+    var sectionBackgroundColorLabel = Model?.Content.Value<ColorPickerValueConverter.PickedColor>("sectionBackGroundColor")?.Label.ToLower() ?? null;
+    var backgroundColorClass = (!string.IsNullOrEmpty(sectionBackgroundColorLabel) && sectionBackgroundColorLabel != "none") ? $"bg-{sectionBackgroundColorLabel}" : "";
+
+
+}
+<section id="great-reviews">
+    @if (!string.IsNullOrEmpty(backgroundColorClass))
+    {
+        <div class="background @backgroundColorClass"></div>
+    }
+
+    <div class="container">
+        <div class="review-left">
+            <h6>@reviewH6</h6>
+            <h1 class="review-h1">@reviewH1</h1>
+            <blockquote class="review-quote">@reviewQuote</blockquote>
+            <div class="stars"><i class="fa-sharp fa-solid fa-star"></i><i class="fa-sharp fa-solid fa-star"></i><i class="fa-sharp fa-solid fa-star"></i><i class="fa-sharp fa-solid fa-star"></i><i class="fa-sharp fa-solid fa-star"></i></div>
+            <p class="review-person">@reviewPerson</p>
+            <p class="review-company">@reviewCompnay</p>
+        </div>
+        <div class="review-right">
+            @if (!string.IsNullOrEmpty(reviewPic))
+            {
+                <img src="@reviewPic" alt="@reviewPicDesc">
+            }
+        </div>
+    </div>
+</section>

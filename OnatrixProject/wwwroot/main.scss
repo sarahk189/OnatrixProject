@@ -2,27 +2,34 @@
 @import "./scss/mixins/_mixins.scss";
 
 
-@import "./scss/components/_wrappers.scss";
+
 @import "./scss/components/_container.scss";
 @import "./scss/components/_links.scss";
 @import "./scss/components/_buttons.scss";
 @import "./scss/components/_typography.scss";
+@import "./scss/components/_wrappers.scss";
+
 
 
 
 @import "./scss/sections/_sections.scss";
 
 
-
+@import "./scss/misc/_your-next-project.scss"; 
 @import "./scss/misc/_tags.scss";
 @import "./scss/misc/_base.scss";
 @import "./scss/misc/_header.scss";
 @import "./scss/misc/_topbar.scss";
+@import "./scss/misc/_footer.scss";
 @import "./scss/misc/_breadcrumb.scss";
+@import "./scss/sections/_project-list-page.scss"; 
 @import "./scss/sections/_recent-projects.scss";
 @import "./scss/misc/_aside.scss";
 @import "./scss/misc/_online-support.scss";
-@import "./scss/misc/_your-next-project.scss";
+
+
+
+
 
 
 

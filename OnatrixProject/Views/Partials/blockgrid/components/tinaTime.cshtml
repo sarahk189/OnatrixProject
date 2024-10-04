@@ -1,0 +1,44 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@using Umbraco.Cms.Core.PropertyEditors.ValueConverters;
+
+@{
+    var tinaPicture = Model?.Content.Value<IPublishedContent>("tinaPicture")?.Url() ?? null;
+    var imageDescription = Model?.Content.Value<string>("imageDescription") ?? null;
+    var tinaText = Model.Content.Value<string>("tinaText");
+    var tinaQuote = Model.Content.Value<string>("tinaQuote");
+    var P1 = Model.Content.Value<string>("P1");
+    var P2 = Model.Content.Value<string>("P2");
+    var P3 = Model.Content.Value<string>("P3");
+    var P4 = Model.Content.Value<string>("P4");
+    var P5 = Model.Content.Value<string>("P5");
+    var P6 = Model.Content.Value<string>("P6");
+    var P7 = Model.Content.Value<string>("P7");
+
+    var sectionBackgroundColorLabel = Model?.Content.Value<ColorPickerValueConverter.PickedColor>("sectionBackGroundColor")?.Label.ToLower() ?? null;
+    var backgroundColorClass = (!string.IsNullOrEmpty(sectionBackgroundColorLabel) && sectionBackgroundColorLabel != "none") ? $"bg-{sectionBackgroundColorLabel}" : "";
+    
+}
+<section id="tina-time">
+    @if (!string.IsNullOrEmpty(backgroundColorClass))
+    {
+        <div class="background @backgroundColorClass"></div>
+    }
+    <div class="container">
+        <div class="tina-left">
+            <img src="@tinaPicture" alt="@imageDescription">
+            <p class="tina-paragraph">@tinaText</p>
+        </div>
+        <div class="tina-right">
+            <blockquote class="h1-2">@tinaQuote</blockquote>
+            <p class="tina-text">@P1</p>
+            <p class="tina-text">@P2</p>
+            <p class="tina-text">@P3</p>
+            <p class="tina-text">@P4</p>
+            <p class="tina-text">@P5</p>
+            <p class="tina-text">@P6</p>
+            <p class="tina-text">@P7</p>
+        </div>
+    </div>
+</section>

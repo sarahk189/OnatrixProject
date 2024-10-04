@@ -1,0 +1,27 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+
+@{
+    var number1 = Model.Content.Value<string>("number1");
+    var number2 = Model.Content.Value<string>("number2");
+    var number3 = Model.Content.Value<string>("number3");
+    var desc1 = Model.Content.Value<string>("desc1");
+    var desc2 = Model.Content.Value<string>("desc2");
+    var desc3 = Model.Content.Value<string>("desc3");
+}
+
+<div class="success-story-numbers">
+    <div class="success-number-box">
+        <h1 class="h1-1">@number1</h1>
+        <p class="paragraph-1">@desc1</p>
+    </div>
+    <div class="success-number-box">
+        <h1 class="h1-2">@number2</h1>
+        <p class="paragraph-2">@desc2</p>
+    </div>
+    <div class="success-number-box">
+        <h1 class="h1-3">@number3</h1>
+        <p class="paragraph-3">@desc3</p>
+    </div>
+</div>

@@ -1,0 +1,15 @@
+﻿@import '../mixins/_mixins-media.scss';
+
+#the-people {
+    display: block; 
+
+    @include mobile {
+        display: none; 
+    }
+
+    @include tablet {
+        display: none;
+    }
+
+   
+}

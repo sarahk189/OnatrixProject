@@ -8,29 +8,14 @@
     var contactForm = Model.Content.Value<global::Umbraco.Cms.Core.Models.Blocks.BlockListModel>("reusableForm");
 }
 
-<div class="container">
+<div class="container contact-form">
     @if (contactForm != null)
     {
-        <h2>@formHeadline</h2>
-        <p>@formParagraph</p>
+        <h2 class="form-headline">@formHeadline</h2>
+        <p class="form-paragraph">@formParagraph</p>
         @using (Html.BeginUmbracoForm("HandleSubmit", "ContactSurface", FormMethod.Post))
         {
             @Html.GetBlockListHtml(contactForm)
         }
-    }
-    else
-    {
-        <p>Contact form is null.</p>
-    }
-
-    @if (TempData["success"] != null)
-    {
-        <div class="alert alert-success" role="alert">
-            @TempData["success"]
-        </div>
-    }
-    else
-    {
-        <p>No success message.</p>
     }
 </div>

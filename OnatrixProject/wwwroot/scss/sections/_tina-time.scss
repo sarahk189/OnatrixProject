@@ -1,0 +1,74 @@
+﻿#tina-time {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    .background {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+    }
+
+    .container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    .tina-left, .tina-right {
+        flex: 1;
+        padding: 20px;
+    }
+
+    .tina-left {
+        max-width: 50%;
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        text-align: start;
+        padding-top: 10%;
+
+        img {
+            max-width: 100%;
+            height: 80%;
+            width: 100%; 
+            padding-right: 10%;
+        }
+
+        .tina-paragraph {
+            margin-top: 10px;
+        }
+    }
+
+    .tina-right {
+        max-width: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        blockquote {
+            font-size: 1.2em; 
+            margin: 0 0 10% 0;
+        }
+
+        .tina-text {
+            font-size: .8em;
+            text-decoration: none; 
+            margin-bottom: 10px; 
+        }
+    }
+
+    @include mobile {
+        .tina-left {
+            display: none; /* Hide the left section on mobile */
+        }
+    }
+
+    @include tablet {
+        .tina-left {
+            display: none; /* Hide the left section on tablet */
+        }
+    }
+}

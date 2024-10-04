@@ -1,18 +1,19 @@
-﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+﻿@using Umbraco.Cms.Web.Common.PublishedModels
+@using Umbraco.Cms.Core.Routing
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
 @inject Umbraco.Cms.Web.Common.UmbracoHelper UmbracoHelper
+@inject IPublishedUrlProvider PublishedUrlProvider
 
 @{
     Layout = null;
-
 
     var rootContents = UmbracoHelper.ContentAtRoot();
     var settings = rootContents.FirstOrDefault(x => x.ContentType.Alias == "settingsPage") ?? null;
     var siteName = settings?.Value<string>("siteName") ?? "Onatrix";
     var siteTagLine = settings?.Value<string>("siteTagLine") ?? "Financial Solutions";
-    var pageTitle = !string.IsNullOrEmpty(ViewBag?.Title) ? $"{ViewBag?.pageTitle} {siteName} - {siteTagLine}" : $"{siteName} - {siteTagLine}";
-    var breadTitle = ViewBag.Title = Model?.Value("pageTitle") ?? null;
-    var favIcon = settings?.Value<IPublishedContent>("siteIcon")?.Url() ?? Url.Content("~/wwwroot/media/vector.svg");
+    var pageTitle = !string.IsNullOrEmpty(ViewBag?.Title) ? $"{ViewBag.Title} - {siteName} - {siteTagLine}" : $"{siteName} - {siteTagLine}";
+    var breadTitle = ViewBag.Title = Model?.Value("pageTitle") ?? string.Empty;
+    var favIcon = settings?.Value<IPublishedContent>("siteIcon")?.Url() ?? Url.Content("~/media/vector.svg");
 }
 
 <!DOCTYPE html>
@@ -30,21 +31,22 @@
 <body>
     <div class="wrapper">
         @await Html.PartialAsync("Partials/static/topbar.cshtml")
-        <header>@await Html.PartialAsync("Partials/static/header.cshtml")</header>
+        <header>
+            @await Html.PartialAsync("Partials/static/header.cshtml")
+        </header>
         <main>
-            @if (!string.IsNullOrEmpty(@breadTitle))
+            @if (!string.IsNullOrEmpty(breadTitle))
             {
-                @await Html.PartialAsync("partials/static/breadcrumb.cshtml")
+                @await Html.PartialAsync("Partials/static/breadcrumb.cshtml")
             }
             @RenderBody()
-            @if (pageTitle != "Onatrix Inc. - Providing Your Financial Solutions!")
+            @if (ViewBag.Title != "Onatrix Inc. - Providing Your Financial Solutions!" && ViewBag.Title != "Contact Us")
             {
-                @await Html.PartialAsync("partials/static/yourNextProject.cshtml")
+                @await Html.PartialAsync("Partials/static/yourNextProject.cshtml")
             }
         </main>
-        <footer>@await Html.PartialAsync("partials/static/footer.cshtml")</footer>
+        <footer>@await Html.PartialAsync("Partials/static/footer.cshtml")</footer>
     </div>
-    <script src="/scripts/main.js"></script>
+    <script src="~/scripts/main.js"></script>
 </body>
 </html>
-

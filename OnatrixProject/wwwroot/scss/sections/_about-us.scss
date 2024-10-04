@@ -1,69 +1,166 @@
 @import '../mixins/_mixins-media.scss';
-@import '../mixins/_mixins-typography.scss'; 
+@import '../mixins/_mixins-typography.scss';
 
 #about-us.spacingBottomClass {
+    height: fit-content;
+
     .container {
-        padding: 20rem;
+        padding: 5rem 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
 
-        // @include mobile {
-        //     padding: 20px;
-        // }
+        @include tablet {
+            align-items: flex-start;
+        }
 
-        // @include tablet {
-        //     padding: 30px;
-        // }
+        @include mobile {
+            align-items: center;
+        }
 
-        // @include desktop {
-        //     padding: 50px;
-        // }
-    
-
-        .umb-block-grid__layout-container   {
+        .umb-block-grid__layout-container {
             display: flex;
+            width: 100%;
             flex-direction: column;
-            width: 45vh;
 
             @include tablet {
-                flex-direction: row;
+                align-items: flex-start;
             }
 
-            .p {
+            @include mobile {
+                align-items: center;
+            }
+
+
+
+            .umb-block-grid__layout-item {
+                width: 70%;
+                height: auto;
                 flex: 1;
-                padding: 1rem;
 
                 @include mobile {
-                    padding: 0.5rem;
+                    text-align: center;
                 }
 
                 @include tablet {
-                    padding: 1rem;
+                    text-align: center;
                 }
 
                 @include desktop {
-                    padding: 1.5rem;
-                }
-            }
-
-            img {
-                flex: 1;
-                padding: 1rem 0;
-
-                @include mobile {
-                    padding: 0.5rem 0;
+                    text-align: left;
                 }
 
-                @include tablet {
-                    padding: 1rem 0;
+                &:first-child {
+                    blockquote {
+                        @include blockquote;
+                        margin-bottom: 20px;
+                        font-style: italic;
+                    }
+
+                    .p {
+                        flex: 1;
+                        padding: 1rem;
+
+                        @include mobile {
+                            padding: 0.5rem;
+                        }
+
+                        @include tablet {
+                            padding: 1rem;
+                        }
+
+                        @include desktop {
+                            padding: 1.5rem;
+                        }
+                    }
+
+                    img {
+                        flex: 1;
+                        padding: 1rem 0;
+
+                        @include mobile {
+                            padding: 0.5rem 0;
+                        }
+
+                        @include tablet {
+                            padding: 1rem 0;
+                        }
+
+                        @include desktop {
+                            padding: 1.5rem 0;
+                        }
+                    }
                 }
 
-                @include desktop {
-                    padding: 1.5rem 0;
-                }
-            }
+                &:last-child {
+                    width: auto;
+                    flex: 1;
+                    position: relative;
 
-            .umb-block-grid__layout-item[data-content-element-type-alias="quotation"] {
-                blockquote {
-                    @include blockquote;
+                    .contact-form {
+                        height: 40em;
+                        width: 40%;
+                        position: absolute;
+                        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                        padding: 20px;
+                        top: -40em;
+                        left: 40em;
+                        background-color: var(--color-light);
+                        border-radius: 10px;
+
+                        @include mobile {
+                            display: none;
+                        }
+
+                        @include tablet {
+                            display: none;
+                        }
+
+                        .form-headline {
+                            background-color: var(--color-primary);
+                            color: var(--color-accent);
+                            padding: 20px;
+                            margin: -20px -17px 18px -17px;
+                            font-weight: 500;
+                            font-size: xx-large;
+                            border-top-left-radius: 5px;
+                            border-top-right-radius: 5px;
+                        }
+
+                        p {
+                            margin-top: 10px;
+                            margin-bottom: 1rem;
+                        }
+
+                        .form-input-group {
+                            margin-bottom: 1rem;
+                        }
+
+                        .form-input {
+                            width: 100%;
+                            padding: 10px;
+                            border: 1px solid #ccc;
+                            border-radius: 5px;
+                        }
+
+                        .form-button {
+                            @include button;
+                            background-color: var(--color-accent);
+                            border: none;
+                            width: 100%;
+                            padding: 10px;
+                            margin-top: 1rem;
+                            cursor: pointer;
+
+                            &:hover {
+                                transition: 0.25s;
+                                font-size: larger;
+                                text-decoration: none !important;
+                                overflow: hidden;
+                                margin-top: 1rem;
+                            }
+                        }
+                    }
                 }
             }
         }

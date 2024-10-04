@@ -1,0 +1,19 @@
+﻿#smile-chick.spacingBottomClass {
+    position: relative;
+    height: 10rem;
+    align-items: center;
+
+    img {
+        position: absolute;
+        top: -30rem;
+        left: 12.5%;
+        z-index: 5;
+        width: 75%;
+        height: 35rem;
+        border-radius: 3px;
+    }
+    
+    @media (max-width: 1024px) { 
+        display: none;
+    }
+}

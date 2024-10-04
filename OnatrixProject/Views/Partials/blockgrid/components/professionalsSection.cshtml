@@ -1,0 +1,49 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>
+@inject Umbraco.Cms.Web.Common.UmbracoHelper UmbracoHelper
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels
+@using Umbraco.Cms.Core.PropertyEditors.ValueConverters
+
+@{
+    var rootContents = UmbracoHelper.ContentAtRoot();
+    var professionals = rootContents.FirstOrDefault(x => x.ContentType.Alias == "professionals1") ?? null;
+    var sectionTitle = professionals?.Value<string>("profsSectionTitle") ?? "";
+    var headline = professionals?.Value<string>("profsHeadline") ?? "";
+
+    var colorLabel = professionals?.Value<ColorPickerValueConverter.PickedColor>("profsBackgroundColor")?.Label.ToLower() ?? null;
+    var backgroundColorClass = (!string.IsNullOrEmpty(colorLabel) && colorLabel != "none") ? $"bg-{colorLabel}" : "";
+
+    var selection = Umbraco.Content(Guid.Parse("a4f77e8e-19ef-4384-8806-55c89abd6337"))
+        .ChildrenOfType("professionalsTemplate")
+        .Where(x => x.IsVisible());
+}
+
+<section id="professionals" class="@backgroundColorClass">
+    <div class="container">
+        <div class="profs-headline">
+            <h6 class="section-title">@sectionTitle</h6>
+            <h2 class="title">@headline</h2>
+        </div>
+        <div class="professionals-list">
+            @if (selection != null)
+            {
+                @foreach (var item in selection)
+                {
+                    var image = item?.Value<IPublishedContent>("professionalsPic")?.Url() ?? "";
+                    var name = item?.Value<string>("professionalsName") ?? "";
+                    var prof = item?.Value<string>("professionalsProfesion") ?? "";
+
+                    <div class="proffesional-single">
+                        <img src="@image" alt="@item!.Name" />
+                        <div class="prof-name">
+                            <h4>@item!.Name</h4>
+                        </div>
+                        <div class="prof-prof">
+                            <p>@prof</p>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</section>

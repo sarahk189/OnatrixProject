@@ -1,0 +1,21 @@
+﻿.nav-menu {
+    display: flex;
+    flex-direction: row;
+
+    @include mobile {
+        display: none;
+        flex-direction: column;
+
+        &.active {
+            display: flex;
+        }
+    }
+}
+
+#toggle-mobile-menu {
+    display: none;
+
+    @include mobile {
+        display: block;
+    }
+}

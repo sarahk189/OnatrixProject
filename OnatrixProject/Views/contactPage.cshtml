@@ -5,25 +5,50 @@
 @{
     Layout = "mainLayout.cshtml";
     ViewBag.Title = Model.Value("pageTitle");
+    var mapBackground = Model?.Value<IPublishedContent>("mapBackground")?.Url() ?? "";
 
-    bool.TryParse(TempData["error_name"]?.ToString()!, out bool error_name);
-    bool.TryParse(TempData["error_email"]?.ToString()!, out bool error_email);
-    bool.TryParse(TempData["error_message"]?.ToString()!, out bool error_message);
+    bool.TryParse(TempData["error_name"]?.ToString(), out bool error_name);
+    bool.TryParse(TempData["error_email"]?.ToString(), out bool error_email);
+    bool.TryParse(TempData["error_message"]?.ToString(), out bool error_message);
+    bool.TryParse(TempData["choices_message"]?.ToString(), out bool choices_message);
+
+    var contactH6 = Model?.Value<string>("contactH6");
+    var contactH1 = Model?.Value<string>("contactH1");
+    var contactP = Model?.Value<string>("contactP");
 }
-<div class="container">
-    <h1>@ViewBag.Title</h1>
+
+<section id="contact-us">
     <div class="container">
-
-        @using (Html.BeginUmbracoForm("HandleSubmit", "ContactSurface", FormMethod.Post))
+        @if (!string.IsNullOrEmpty(ViewBag.Title) && ViewBag.Title == "Contact Us")
         {
-            @Html.GetBlockListHtml(Model.ContactForm)
-        }
-
-        @if (TempData["success"] != null)
-        {
-                <div class="alert alert-success" role="alert">
-                @TempData["success"]
-                </div>
+            @await Html.PartialAsync("Partials/static/yourNextProject.cshtml")
         }
     </div>
-</div>
+    <div class="map-background" style="background-image: url('@mapBackground');">
+        <div class="container">
+            <div class="contact-form-overlay">
+                <div class="headers">
+                    <h2 class="contact-h6">@contactH6</h2>
+                    <h3 class="contact-h3">@contactH1</h3>
+                    <p class="contact-p">@contactP</p>
+                </div>
+                @using (Html.BeginUmbracoForm("HandleSubmit", "ContactSurface", FormMethod.Post))
+                {
+                    <div class="form-grid">
+                        @Html.GetBlockListHtml(Model?.ContactForm)
+                    </div>
+                }
+
+                @if (TempData["success"] != null)
+                {
+                    <div class="alert alert-success" role="alert">
+                        @TempData["success"]
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        @await Html.PartialAsync("Partials/blockgrid/components/partners-contact-page", null)
+    </div>
+</section>

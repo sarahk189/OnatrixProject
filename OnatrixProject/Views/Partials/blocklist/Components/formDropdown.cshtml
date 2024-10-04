@@ -1,0 +1,34 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+
+@{
+    var uniqueName = Model?.Content?.Value<string>("uniqueName") ?? "";
+    var label = Model?.Content?.Value<string>("label") ?? ""; 
+    var choices = Model?.Content?.Value<string>("choices")?.Split(',') ?? Enumerable.Empty<string>();
+    var isRequired = Model?.Content?.Value<bool>("isRequired") ?? false;
+    var errorMessage = ViewData[$"error_{uniqueName}"]?.ToString() ?? "";
+    var viewDataValue = ViewData[uniqueName]?.ToString() ?? "";
+}
+
+<div id="@uniqueName" class="form-input-group">
+    <label class="form-label" for="@uniqueName">@label</label>
+    <select id="@uniqueName" name="@uniqueName" class="form-input" @(isRequired ? "required" : "")>
+        @foreach (var choice in choices)
+        {
+            if (choice == viewDataValue)
+            {
+                <option value="@choice" selected="selected">@choice</option>
+            }
+            else
+            {
+                <option value="@choice">@choice</option>
+            }
+        }
+    </select>
+
+    @if (!string.IsNullOrEmpty(errorMessage))
+    {
+        <span class="form-input-error">@errorMessage</span>
+    }
+</div>

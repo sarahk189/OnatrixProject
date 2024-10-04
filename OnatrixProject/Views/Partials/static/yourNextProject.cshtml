@@ -10,39 +10,45 @@
     var officePhoneNumber = settings?.Value<string>("officePhoneNumber") ?? "";
     var officeEmail = settings?.Value<string>("officeEmail") ?? "";
 
-    var backgroundImage1 = settings?.Value<IPublishedContent>("backgroundImagePreFooter1");
+    var backgroundImage1 = settings?.Value<IPublishedContent>("backgroundImagePreFooter1")?.Url() ?? "";
     var background1Alt = settings?.Value<string>("backgroundImage1Alt") ?? "";
 
-    var backgroundImage2 = settings?.Value<IPublishedContent>("backgroundImagePreFooter2");
+    var backgroundImage2 = settings?.Value<IPublishedContent>("backgroundImagePreFooter2")?.Url() ?? "";
     var background2Alt = settings?.Value<string>("backgroundImage2Alt") ?? "";
 
-    var picture = settings?.Value<IPublishedContent>("mainPicturePreFooter");
+    var picture = settings?.Value<IPublishedContent>("mainPicture")?.Url() ?? "";
     var backgroundColor = settings?.Value<ColorPickerValueConverter.PickedColor>("backgroundColorPreFooter")?.Label.ToLower() ?? null;
     var backgroundColorClass = (!string.IsNullOrEmpty(backgroundColor) && backgroundColor != "none") ? $"bg-{backgroundColor}" : "";
     var header = settings?.Value<string>("preFooterHeader") ?? "";
 }
 
-<div id="prefooter" class="bg-@backgroundColorClass">
+<div id="prefooter" class="@backgroundColorClass">
     <div class="container">
         <div class="left-pictures">
-            <div class="background-image1" style="background-image: url('@backgroundImage1');"></div>
-            <div class="background-image2" style="background-image: url('@backgroundImage2');"></div>
-            <div class="picture" style="background-image: url('@picture');"></div>
+            <div class="background-image1"><img src="@backgroundImage1" alt="@background1Alt"></div>
+            <div class="background-image2"><img src="@backgroundImage2" alt="@background2Alt"></div>
+            <div class="picture"><img src="@picture"/></div>
         </div>
         <div class="row">
             <div class="col-md-6">
                 <div class="prefooter-content">
                     <h2>@header</h2>
                     <div class="office-location">
-                        <p>Office location</p>
+                        <div class="text-header">
+                            <i class="fa-light fa-location-dot"></i><h6>Office location</h6>
+                        </div>
                         <p>@officeLocation</p>
                     </div>
                     <div class="office-phone">
-                        <p>Phone Number</p>
+                        <div class="text-header">
+                            <i class="fa-sharp fa-light fa-phone"></i><h6>Phone Number</h6>
+                        </div>
                         <p>@officePhoneNumber</p>
                     </div>
                     <div class="office-email">
-                        <p>E-mail Address</p>
+                        <div class="text-header">
+                            <i class="fa-light fa-envelope"></i><h6>E-mail Address</h6>
+                        </div>
                         <p>@officeEmail</p>
                     </div>
                 </div>
@@ -50,3 +56,4 @@
         </div>
     </div>
 </div>
+

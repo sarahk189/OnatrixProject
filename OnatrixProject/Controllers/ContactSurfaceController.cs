@@ -26,12 +26,14 @@ namespace OnatrixProject.Controllers
                 ViewData["phone"] = form.Phone;
                 ViewData["service"] = form.Service;
                 ViewData["message"] = form.Message;
+                ViewData["choices"] = form.Choices; // Ensure this is passed
 
                 ViewData["error_name"] = string.IsNullOrEmpty(form.Name) ? "Name is required." : null;
                 ViewData["error_email"] = string.IsNullOrEmpty(form.Email) ? "Email is required." : null;
                 ViewData["error_phone"] = string.IsNullOrEmpty(form.Phone) ? "Phone is required." : null;
                 ViewData["error_service"] = string.IsNullOrEmpty(form.Service) ? "Service is required." : null;
                 ViewData["error_message"] = string.IsNullOrEmpty(form.Message) ? "Message is required." : null;
+                ViewData["error_choices"] = string.IsNullOrEmpty(form.Message) ? "A choice is required." : null;
                 return CurrentUmbracoPage();
             }
 

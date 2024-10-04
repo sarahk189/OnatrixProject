@@ -1,8 +1,13 @@
 @import '../mixins/_mixins-grid.scss';
+@import '../mixins/_mixins-media.scss';
 
 #our-services {
+    margin-bottom: 10px;
+    display: flex;
+
     .container {
         padding: 4rem;
+        justify-content: center;
 
         .headline {
             text-align: center;
@@ -22,7 +27,9 @@
         }
 
         .services {
-            @include grid-3;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
 
             a {
                 text-decoration: none;
@@ -87,7 +94,6 @@
                 align-items: center;
                 margin: 0 1rem;
 
-
                 .change {
                     color: black;
                     cursor: pointer;
@@ -123,15 +129,165 @@
                         margin: 0 0.5rem;
 
                         a {
-                            text-decoration: none; /* Remove underline from page numbers */
+                            text-decoration: none;
                             color: inherit;
-                            font-weight: 700; /* Ensure the link inherits the color */
+                            font-weight: 700;
                         }
 
                         &.active {
                             color: var(--color-primary);
                             background-color: none;
                             border: 1px solid var(--color-accent);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @include mobile {
+        .container {
+            padding: 2rem;
+
+            .headline {
+                text-align: center; 
+                .section-title {
+                    font-size: 1rem;
+                }
+
+                .title {
+                    font-size: 1.5rem;
+                }
+            }
+
+            .services {
+                grid-template-columns: 1fr;
+                gap: 10px;
+
+                .item {
+                    padding: 0.5rem;
+
+                    .body {
+                        img {
+                            height: 150px;
+                        }
+                    }
+                }
+            }
+
+            .pagination {
+                display: flex;
+                justify-content: center; 
+                .container {
+                    .change {
+                        margin: 0 0.25rem;
+                    }
+
+                    .pages {
+                        .number {
+                            width: 30px;
+                            height: 30px;
+                            margin: 0 0.25rem;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @include tablet {
+        .container {
+            padding: 3rem;
+
+            .headline {
+                text-align: center; 
+                .section-title {
+                    font-size: 1.1rem;
+                }
+
+                .title {
+                    font-size: 1.75rem;
+                }
+            }
+
+            .services {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+
+                .item {
+                    padding: 0.75rem;
+
+                    .body {
+                        img {
+                            height: 180px;
+                        }
+                    }
+                }
+            }
+
+            .pagination {
+                display: flex;
+                justify-content: center; 
+                .container {
+                    .change {
+                        margin: 0 0.5rem;
+                    }
+
+                    .pages {
+                        .number {
+                            width: 35px;
+                            height: 35px;
+                            margin: 0 0.5rem;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @include desktop {
+        .container {
+            padding: 4rem;
+
+            .headline {
+                text-align: center; 
+                .section-title {
+                    font-size: 1.25rem;
+                }
+
+                .title {
+                    font-size: 2rem;
+                }
+            }
+
+            .services {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 20px;
+
+                .item {
+                    padding: 1rem;
+
+                    .body {
+                        img {
+                            height: 220px;
+                        }
+                    }
+                }
+            }
+
+            .pagination {
+                display: flex;
+                justify-content: center; 
+                .container {
+                    .change {
+                        margin: 0 0.5rem;
+                    }
+
+                    .pages {
+                        .number {
+                            width: 40px;
+                            height: 40px;
+                            margin: 0 0.5rem;
                         }
                     }
                 }

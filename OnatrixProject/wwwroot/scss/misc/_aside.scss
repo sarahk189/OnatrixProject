@@ -16,12 +16,28 @@ $padding: 20px;
     width: 30%;
     padding: $padding;
     border-left: 1px solid $border-color;
+
+    @include tablet {
+        display: none;
+    }
+
+    @include mobile {
+        display: none;
+    }
 }
 
 .aside-left {
     width: 30%;
     padding: $padding;
     border-right: 1px solid $border-color;
+
+    @include tablet {
+        display: none;
+    }
+
+    @include mobile {
+        display: none;
+    }
 }
 
 .recent-projects,

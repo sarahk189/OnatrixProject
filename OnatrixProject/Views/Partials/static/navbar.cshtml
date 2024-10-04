@@ -1,0 +1,33 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@using Umbraco.Cms.Core.Models.PublishedContent
+@using Umbraco.Cms.Core.Routing
+@inject Umbraco.Cms.Web.Common.UmbracoHelper UmbracoHelper
+@inject IPublishedUrlProvider PublishedUrlProvider
+
+@{
+    var rootContents = UmbracoHelper.ContentAtRoot().FirstOrDefault();
+    var navigationItems = rootContents?.Children ?? Enumerable.Empty<IPublishedContent>();
+}
+
+<nav class="navbar">
+    <ul class="navbar-menu">
+        @foreach (var item in navigationItems)
+        {
+            var hasChildren = item.Children.Any();
+            <li class="navbar-item @(hasChildren ? "dropdown" : "")">
+                <a href="@item.Url(PublishedUrlProvider)" class="navbar-link">@item.Name</a>
+                @if (hasChildren)
+                {
+                    <ul class="dropdown-menu">
+                        @foreach (var child in item.Children)
+                        {
+                            <li class="dropdown-item">
+                                <a href="@child.Url(PublishedUrlProvider)" class="dropdown-link">@child.Name</a>
+                            </li>
+                        }
+                    </ul>
+                }
+            </li>
+        }
+    </ul>
+</nav>

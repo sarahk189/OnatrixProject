@@ -1,0 +1,19 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@inject Umbraco.Cms.Web.Common.UmbracoHelper UmbracoHelper
+
+@{
+    var rootContents = UmbracoHelper.ContentAtRoot();
+    var settings = rootContents.FirstOrDefault(x => x.ContentType.Alias == "settingsPage") ?? null;
+    var pic = settings?.Value<IPublishedContent>("aboutLinkPic")?.Url() ?? null; 
+    var title = settings?.Value<string>("aboutLinkTitle");
+    var text = settings?.Value<string>("aboutLinkText");
+}
+
+<a href="/about/" id="about-us-link">
+    <div class="aside-container">
+        <h2 class="about-link-title">@title</h2>
+        <img class="about-link-pic" src="@pic">
+        <p class="about-link-text">@text</p>
+    </div>
+</a>

@@ -1,67 +1,175 @@
+@import '../mixins/_mixins-media.scss';
+
 #why-choose-us {
-    height: 75em;
-    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top: 2rem;
+    margin-bottom: 0;
+    margin-top: 28em;
+    height: 30em;
 
+    @include mobile {
+        padding: 20px;
+        height: auto;
+        margin-top: 2rem;
+    }
 
-    .container {
+    @include tablet {
+        height: auto;
+        margin-top: 2rem;
+    }
+
+    @include desktop {
+        height: 5em;
+    }
+
+    img {
+        overflow: hidden;
+        height: 30em;
+        object-fit: cover;
+        object-position: top;
+
+        @include mobile {
+            display: none;
+        }
+
+        @include tablet {
+            display: none;
+        }
+    }
+
+    h2, h3 {
+        position: relative;
+        padding: 1rem;
         text-align: center;
-        padding-top: 10vh;
-        position: relative; 
+        overflow: hidden;
 
-        img {
-            padding-top: 8vh;
-            width: 100%; 
-            height: auto; 
-            z-index: -1; 
-            display: block; 
-            position: relative; 
+        @include mobile {
+            font-size: 1.5rem;
+            padding: 0.5rem;
+            position: relative;
+            width: 90%;
         }
 
-        .umb-block-grid__area {
-            display: flex;
-            position: absolute; 
-            top: 0; 
-            left: 0; 
-            width: 100%;
-            z-index: 1; 
-            margin-top: 10px;
-            align-items: center;
-            justify-content: center;   
+        @include tablet {
+            font-size: 2rem;
+            position: relative;
+            width: 80%;
         }
 
-        h2 {
-            margin: 0; 
-            padding: 1rem; 
+        @include desktop {
+            font-size: 2.5rem;
+            position: relative;
+            width: auto;
+        }
+    }
+
+    h2 {
+        font-size: 2.5rem;
+        color: var(--color-primary);
+        top: -12em;
+
+        @include mobile {
+            font-size: 1.5rem;
+            width: 90%;
+            top: 0;
         }
 
-        h3 {
-            font-size: 40px;
+        @include tablet {
+            font-size: 2rem;
+            width: 80%;
+            top: 0;
         }
 
-        p {
-            margin: 2rem 5rem; 
-            padding: 0.5rem; 
+        @include desktop {
+            font-size: 2.5rem;
+            width: auto;
+        }
+    }
+
+    h3 {
+        color: var(--color-secondary);
+        font-size: 2rem;
+        margin-top: 10px;
+        padding-top: 10px;
+        top: -16em;
+        overflow: hidden;
+
+        @include mobile {
+            font-size: 1.25rem;
+            width: 90%;
+            top: 0;
+        }
+
+        @include tablet {
+            font-size: 1.5rem;
+            width: 80%;
+            top: 0;
+        }
+
+        @include desktop {
+            font-size: 2rem;
+            width: auto;
+        }
+    }
+
+    p {
+        margin: 2rem auto;
+        padding: 0.5rem;
+        text-align: center;
+        font-size: inherit;
+        color: var(--color-dark);
+        position: relative;
+        top: -30em;
+        overflow: hidden;
+
+        @include mobile {
+            margin: 1rem auto;
+            width: 90%;
+            top: 0;
+        }
+
+        @include tablet {
+            margin: 1.5rem auto;
+            width: 80%;
+            top: 0;
+        }
+
+        @include desktop {
+            margin: 2rem auto;
             width: 60%;
-            text-align: center;
+        }
+    }
+
+    .btn {
+        margin-top: 1rem;
+        align-content: center;
+        align-items: center;
+        position: relative;
+        top: -30em;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        width: 30%;
+        margin: 0 auto;
+
+        @include mobile {
+            margin-top: 0.5rem;
+            top: 0;
+            width: 60%;
         }
 
-        .btn {
-            margin-top: 1rem; 
+        @include tablet {
+            margin-top: 0.75rem;
+            top: 0;
+            width: 30%;
         }
 
-        img:nth-of-type(2) {
-            position: absolute;
-            opacity: 0 !important;
-            transform: translateY(100%) ip !important;
-            transition: opacity 0.5s ease-out, transform 0.5s ease-out !important;
-        }
-
-        &.in-view {
-            img:nth-of-type(2) {
-                opacity: 1 ipo !important;
-                transform: translateY(0) !important;
-            }
+        @include desktop {
+            margin-top: 1rem;
+            width: 30%;
         }
     }
 }
-
