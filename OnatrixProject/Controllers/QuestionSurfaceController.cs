@@ -18,7 +18,6 @@ namespace OnatrixProject.Controllers
         {
         }
 
-
         public async Task<IActionResult> HandleSubmit(QuestionFormModel form)
         {
             if (!ModelState.IsValid)
@@ -27,11 +26,9 @@ namespace OnatrixProject.Controllers
                 ViewData["email"] = form.Email;
                 ViewData["message"] = form.Message;
 
-
                 ViewData["error_name"] = string.IsNullOrEmpty(form.Name) ? "Name is required" : null;
                 ViewData["error_email"] = string.IsNullOrEmpty(form.Email) ? "Email is required" : null;
-                ViewData["error_message"] = string.IsNullOrEmpty(form.Email) ? "Message is required" : null;
-
+                ViewData["error_message"] = string.IsNullOrEmpty(form.Message) ? "Message is required" : null;
 
                 return CurrentUmbracoPage();
             }
@@ -41,18 +38,17 @@ namespace OnatrixProject.Controllers
 
             if (result)
             {
-                TempData["success"] = "Form submitted successfully";
+                TempData["questionsuccess"] = "Form submitted successfully";
 
                 TempData.Remove("name");
                 TempData.Remove("email");
-                TempData.Remove("phone");
+                TempData.Remove("message");
 
                 return RedirectToCurrentUmbracoPage();
-
             }
             else
             {
-                TempData["success"] = "An error occurred while submitting the form";
+                TempData["questionerror"] = "An error occurred while submitting the form";
                 return RedirectToCurrentUmbracoPage();
             }
         }

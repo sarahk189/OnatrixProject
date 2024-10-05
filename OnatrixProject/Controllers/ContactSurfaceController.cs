@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using OnatrixProject.Models;
+using OnatrixProject.Services;
 using Umbraco.Cms.Core.Cache;
 using Umbraco.Cms.Core.Logging;
 using Umbraco.Cms.Core.Routing;
@@ -19,7 +20,7 @@ namespace OnatrixProject.Controllers
 
 
         [HttpPost]
-        public IActionResult HandleSubmit(ContactFormModels form)
+        public async Task<IActionResult> HandleSubmit(ContactFormModels form)
         {
             if (!ModelState.IsValid)
             {
@@ -29,20 +30,31 @@ namespace OnatrixProject.Controllers
 
 
                 ViewData["error_name"] = string.IsNullOrEmpty(form.Name) ? "Name is required" : null;
-                ViewData["error_phone"] = string.IsNullOrEmpty(form.Email) ? "Phone is required" : null;
+                ViewData["error_phone"] = string.IsNullOrEmpty(form.Phone) ? "Phone is required" : null;
                 ViewData["error_email"] = string.IsNullOrEmpty(form.Email) ? "Email is required" : null;
 
 
                 return CurrentUmbracoPage();
             }
 
-            TempData["success"] = "Form submitted successfully";
+            EmailService emailService = new EmailService();
+            var result = await emailService.SendEmailAsync(form.Email, form.Name);
 
-            TempData.Remove("name");
-            TempData.Remove("phone");
-            TempData.Remove("email");
+            if (result)
+            {
+                TempData["success"] = "Form submitted successfully";
 
-            return RedirectToCurrentUmbracoPage();
+                TempData.Remove("name");
+                TempData.Remove("email");
+                TempData.Remove("phone");
+
+                return RedirectToCurrentUmbracoPage();
+            }
+            else
+            {
+                TempData["error"] = "An error occurred while submitting the form";
+                return RedirectToCurrentUmbracoPage();
+            }
         }
 
     }

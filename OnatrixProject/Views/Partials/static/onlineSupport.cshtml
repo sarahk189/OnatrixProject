@@ -1,4 +1,4 @@
-﻿@model OnatrixProject.Models.ContactFormModels
+﻿@model OnatrixProject.Models.OnlineSupportFormModel
 @using Umbraco.Cms.Web.Common.PublishedModels;
 @inject Umbraco.Cms.Web.Common.UmbracoHelper UmbracoHelper
 @using Umbraco.Cms.Core.PropertyEditors.ValueConverters;
@@ -11,25 +11,23 @@
     var backgroundColorClass = (!string.IsNullOrEmpty(sectionBackgroundColorLabel) && sectionBackgroundColorLabel != "none") ? $"bg-{sectionBackgroundColorLabel}" : "";
    
     bool.TryParse(TempData["error_email"]?.ToString(), out bool error_email);
-   
-
 }
 
 <div class="online-support-container @backgroundColorClass">
     <h4>How Can We Help You?</h4>
     <p>Online support 24/7. We are here to help you.</p>
-    @using (Html.BeginUmbracoForm("HandleSubmitEmailOnly", "ContactSurface", FormMethod.Post))
+    @using (Html.BeginUmbracoForm("HandleSubmitEmailOnly", "OnlineSupportSurface", FormMethod.Post))
     {
         <div class="form-group">
             <div class="input-group">
-                <input type="email" class="form-control" id="Email" name="Email" placeholder="Email address" value="@TempData["email"]" />
+                <input type="email" class="form-control" id="Email" name="Email" placeholder="Email address" value="@TempData["email"]" oninput="toggleSubmitButton()" />
                 <div class="input-group-placeholder">
                     <span class="input-group-icon"><i class="fa-sharp fa-light fa-envelope"></i></span>
                 </div>
             </div>
             <span class="text-danger">@ViewData["error_email"]</span>
         </div>
-        <button type="submit" class="btn btn-primary submit-btn" style="display: none;">Submit</button>
+        <button type="submit" class="btn btn-primary submit-btn" id="submitButton" style="display: none;">Submit</button>
     }
     @if (TempData["emailsuccess"] != null)
     {
@@ -37,12 +35,25 @@
             @TempData["emailsuccess"]
         </div>
     }
+    @if (TempData["emailerror"] != null)
+    {
+        <div class="alert alert-danger" role="alert">
+            @TempData["emailerror"]
+        </div>
+    }
     <div class="background-icon">
         <i class="fa-sharp fa-light fa-envelope"></i>
     </div>
 </div>
 
-
-
-
-
+<script>
+    function toggleSubmitButton() {
+        var emailInput = document.getElementById('Email');
+        var submitButton = document.getElementById('submitButton');
+        if (emailInput.value.trim() !== '') {
+            submitButton.style.display = 'block';
+        } else {
+            submitButton.style.display = 'none';
+        }
+    }
+</script>
