@@ -9,6 +9,10 @@
 
     var sectionBackgroundColorLabel = settings?.Value<ColorPickerValueConverter.PickedColor>("onlineSupportBackgroundColor")?.Label.ToLower() ?? null;
     var backgroundColorClass = (!string.IsNullOrEmpty(sectionBackgroundColorLabel) && sectionBackgroundColorLabel != "none") ? $"bg-{sectionBackgroundColorLabel}" : "";
+   
+    bool.TryParse(TempData["error_email"]?.ToString(), out bool error_email);
+   
+
 }
 
 <div class="online-support-container @backgroundColorClass">
@@ -18,7 +22,7 @@
     {
         <div class="form-group">
             <div class="input-group">
-                <input type="email" class="form-control" id="Email" name="Email" placeholder="Email address" value="@Model.Email" />
+                <input type="email" class="form-control" id="Email" name="Email" placeholder="Email address" value="@TempData["email"]" />
                 <div class="input-group-placeholder">
                     <span class="input-group-icon"><i class="fa-sharp fa-light fa-envelope"></i></span>
                 </div>
@@ -27,11 +31,10 @@
         </div>
         <button type="submit" class="btn btn-primary submit-btn" style="display: none;">Submit</button>
     }
-
-    @if (TempData["success"] != null)
+    @if (TempData["emailsuccess"] != null)
     {
         <div class="alert alert-success" role="alert">
-            @TempData["success"]
+            @TempData["emailsuccess"]
         </div>
     }
     <div class="background-icon">
@@ -39,16 +42,6 @@
     </div>
 </div>
 
-<script>
-    document.getElementById('Email').addEventListener('input', function () {
-        var submitButton = document.querySelector('.submit-btn');
-        if (this.value.trim() !== '') {
-            submitButton.style.display = 'block';
-        } else {
-            submitButton.style.display = 'none';
-        }
-    });
-</script>
 
 
 

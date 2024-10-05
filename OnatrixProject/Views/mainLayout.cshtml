@@ -14,6 +14,7 @@
     var pageTitle = !string.IsNullOrEmpty(ViewBag?.Title) ? $"{ViewBag.Title} - {siteName} - {siteTagLine}" : $"{siteName} - {siteTagLine}";
     var breadTitle = ViewBag.Title = Model?.Value("pageTitle") ?? string.Empty;
     var favIcon = settings?.Value<IPublishedContent>("siteIcon")?.Url() ?? Url.Content("~/media/vector.svg");
+    var currentPageType = Model?.ContentType?.Alias;
 }
 
 <!DOCTYPE html>
@@ -35,12 +36,12 @@
             @await Html.PartialAsync("Partials/static/header.cshtml")
         </header>
         <main>
-            @if (!string.IsNullOrEmpty(breadTitle))
+            @if (!string.IsNullOrEmpty(breadTitle) && pageTitle != "Get to Know Us")
             {
                 @await Html.PartialAsync("Partials/static/breadcrumb.cshtml")
             }
             @RenderBody()
-            @if (ViewBag.Title != "Onatrix Inc. - Providing Your Financial Solutions!" && ViewBag.Title != "Contact Us")
+            @if (ViewBag.Title != "Onatrix Inc. - Providing Your Financial Solutions!" && ViewBag.Title != "Contact Us" && currentPageType != "modularPage" && currentPageType != "contact")
             {
                 @await Html.PartialAsync("Partials/static/yourNextProject.cshtml")
             }

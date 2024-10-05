@@ -6,6 +6,10 @@
     var formHeadline = Model.Content.Value<string>("formHeadline");
     var formParagraph = Model.Content.Value<string>("formParagraph");
     var contactForm = Model.Content.Value<global::Umbraco.Cms.Core.Models.Blocks.BlockListModel>("reusableForm");
+    bool.TryParse(TempData["error_name"]?.ToString(), out bool error_name);
+    bool.TryParse(TempData["error_email"]?.ToString(), out bool error_email);
+    bool.TryParse(TempData["error_phone"]?.ToString(), out bool error_message);
+
 }
 
 <div class="container contact-form">
@@ -16,6 +20,16 @@
         @using (Html.BeginUmbracoForm("HandleSubmit", "ContactSurface", FormMethod.Post))
         {
             @Html.GetBlockListHtml(contactForm)
+            <span class="text-danger">@ViewData["error_name"]</span>
+            <span class="text-danger">@ViewData["error_phone"]</span>
+            <span class="text-danger">@ViewData["error_email"]</span>
+            @if (TempData["success"] != null)
+            {
+                <div class="alert alert-success" role="alert">
+                    @TempData["success"]
+                </div>
+            }
         }
+        
     }
 </div>

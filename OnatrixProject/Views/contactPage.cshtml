@@ -15,6 +15,7 @@
     var contactH6 = Model?.Value<string>("contactH6");
     var contactH1 = Model?.Value<string>("contactH1");
     var contactP = Model?.Value<string>("contactP");
+    var blockGrid = Model?.Value<Umbraco.Cms.Core.Models.Blocks.BlockGridModel>("partnersSlider");
 }
 
 <section id="contact-us">
@@ -37,18 +38,17 @@
                     <div class="form-grid">
                         @Html.GetBlockListHtml(Model?.ContactForm)
                     </div>
-                }
-
-                @if (TempData["success"] != null)
-                {
-                    <div class="alert alert-success" role="alert">
-                        @TempData["success"]
-                    </div>
+                    @if (TempData["success"] != null)
+                    {
+                        <div class="alert alert-success" role="alert">
+                            @TempData["success"]
+                        </div>
+                    }
                 }
             </div>
         </div>
     </div>
     <div class="container">
-        @await Html.PartialAsync("Partials/blockgrid/components/partners-contact-page", null)
+        @Html.GetBlockGridHtml(blockGrid)
     </div>
 </section>

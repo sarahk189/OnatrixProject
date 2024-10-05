@@ -50,15 +50,16 @@ header {
 
         .search {
             display: flex;
-            align-items: center;
+            align-items: end;
             font-size: 25px;
-        }
+            margin-left: auto; 
 
-        #toggle-mobile-menu {
-            display: block;
+            #toggle-mobile-menu {
+                display: block;
 
-            @include desktop {
-                display: none;
+                @include desktop {
+                    display: none;
+                }
             }
         }
     }

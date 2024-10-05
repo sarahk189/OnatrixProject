@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 using OnatrixProject.Models;
 using Umbraco.Cms.Core.Cache;
 using Umbraco.Cms.Core.Logging;
@@ -16,43 +17,33 @@ namespace OnatrixProject.Controllers
         {
         }
 
+
         [HttpPost]
         public IActionResult HandleSubmit(ContactFormModels form)
         {
             if (!ModelState.IsValid)
             {
                 ViewData["name"] = form.Name;
-                ViewData["email"] = form.Email;
                 ViewData["phone"] = form.Phone;
-                ViewData["service"] = form.Service;
-                ViewData["message"] = form.Message;
-                ViewData["choices"] = form.Choices; // Ensure this is passed
+                ViewData["email"] = form.Email;
 
-                ViewData["error_name"] = string.IsNullOrEmpty(form.Name) ? "Name is required." : null;
-                ViewData["error_email"] = string.IsNullOrEmpty(form.Email) ? "Email is required." : null;
-                ViewData["error_phone"] = string.IsNullOrEmpty(form.Phone) ? "Phone is required." : null;
-                ViewData["error_service"] = string.IsNullOrEmpty(form.Service) ? "Service is required." : null;
-                ViewData["error_message"] = string.IsNullOrEmpty(form.Message) ? "Message is required." : null;
-                ViewData["error_choices"] = string.IsNullOrEmpty(form.Message) ? "A choice is required." : null;
+
+                ViewData["error_name"] = string.IsNullOrEmpty(form.Name) ? "Name is required" : null;
+                ViewData["error_phone"] = string.IsNullOrEmpty(form.Email) ? "Phone is required" : null;
+                ViewData["error_email"] = string.IsNullOrEmpty(form.Email) ? "Email is required" : null;
+
+
                 return CurrentUmbracoPage();
             }
 
-            TempData["success"] = "Thank you for your message! We will get back to you as soon as possible!";
+            TempData["success"] = "Form submitted successfully";
+
+            TempData.Remove("name");
+            TempData.Remove("phone");
+            TempData.Remove("email");
+
             return RedirectToCurrentUmbracoPage();
         }
 
-        [HttpPost]
-        public IActionResult HandleSubmitEmailOnly(ContactFormModels form)
-        {
-            if (string.IsNullOrEmpty(form.Email))
-            {
-                TempData["email"] = form.Email;
-                TempData["error_email"] = "Email is required.";
-                return CurrentUmbracoPage();
-            }
-
-            TempData["success"] = "Thank you for your message! We will get back to you as soon as possible!";
-            return RedirectToCurrentUmbracoPage();
-        }
     }
 }

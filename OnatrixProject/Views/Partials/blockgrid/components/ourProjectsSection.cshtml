@@ -5,94 +5,53 @@
 
 @{
     var sectionTitle = Model?.Content.Value<string>("projectSectionTitle") ?? "Section Title";
-    var headline = Model?.Content.Value<string>("headline") ?? "";
-    var colorLabel = Model?.Content.Value<ColorPickerValueConverter.PickedColor>("backgroundColor")?.Label.ToLower() ?? null;
+    var headline = Model?.Content.Value<string>("projectSectionHeadline") ?? "";
+    var colorLabel = Model?.Content.Value<ColorPickerValueConverter.PickedColor>("projectBackgroundColor")?.Label.ToLower() ?? null;
     var backgroundColorClass = (!string.IsNullOrEmpty(colorLabel) && colorLabel != "none") ? $"bg-{colorLabel}" : "";
 
-    var selection = Umbraco.Content(Guid.Parse("b0ed4074-a79a-4f4a-8046-7f7cd1ce46df"))
-        .ChildrenOfType("projectItemTemplate")
+    var content = Umbraco.Content(Guid.Parse("b0ed4074-a79a-4f4a-8046-7f7cd1ce46df"));
+    var selection = content?.ChildrenOfType("projectItemTemplate")
         .Where(x => x.IsVisible())
         .Take(4);
-
-    Layout = "mainLayout.cshtml";
-    ViewBag.Title = sectionTitle;
-
-    var itemsPerPage = 4;
-    if (!int.TryParse(Context.Request.Query["page"], out int currentPage))
-        currentPage = 1;
-
-    var totalItems = selection?.Count() ?? 0;
-    var pagedItems = selection?.Skip((currentPage - 1) * itemsPerPage).Take(itemsPerPage);
 }
 
 <section id="our-projects" class="@backgroundColorClass">
     <div class="container">
-        @if (headline != null)
+        @if (!string.IsNullOrEmpty(headline))
         {
             <div class="headline">
-                <h2 class="title">@headline)</h2>
+                <h6 class="project-title">@sectionTitle</h6>
+                <h2 class="project-headline">@headline</h2>
             </div>
         }
-        <div class="projects">
-            @if (pagedItems != null)
+    </div>
+    <div class="projects">
+        @if (selection != null)
+        {
+            @foreach (var item in selection)
             {
-                @foreach (var item in pagedItems)
-                {
-                    var image = item?.Value<IPublishedContent>("thumbnailImage")?.Url() ?? "";
-                    var preamble = item?.Value<string>("projectDescription") ?? "";
-                    var date = item?.Value<string>("projectDate") ?? "";
+                var image = item?.Value<IPublishedContent>("thumbnailImage")?.Url() ?? "";
+                var preamble = item?.Value<string>("projectDescription") ?? "";
+                var date = item?.Value<string>("projectDate") ?? "";
 
-                    <a href="@item.Url()">
-                        <div class="item">
-                            <div class="header">
-                                <h4>@item.Name()</h4>
+                <a href="@item?.Url()" class="project-item">
+                    <div class="project" style="background-image: url('@image');">
+                        <div class="overlay">
+                            <div class="text">
+                                <div class="header">
+                                    <h4>@item?.Name()</h4>
+                                </div>
+                                <div class="footer">
+                                    <p>Financial Services</p>
+                                </div>
                             </div>
-                            <div class="date">
-                                <div>@date</div>
-                            </div>
-                            <div class="body">
-                                <img src="@image" alt="@item.Name()">
-                            </div>
-                            <div class="footer">
-                                <p>@preamble</p>
+                            <div class="icon">
+                                <i class="fa-regular fa-arrow-right"></i>
                             </div>
                         </div>
-                    </a>
-                }
+                    </div>
+                </a>
             }
-        </div>
+        }
     </div>
 </section>
-
-@if (totalItems > itemsPerPage)
-{
-    <section class="pagination">
-        <div class="container">
-            @if (currentPage > 1)
-            {
-                <a href="?page=@(currentPage - 1)" class="change">PREV</a>
-            }
-            else
-            {
-                <span class="change inactive">PREV</span>
-            }
-
-            <ul class="pages">
-                @for (int i = 1; i <= Math.Ceiling((decimal)totalItems / itemsPerPage); i++)
-                {
-                    <li class="@((i == currentPage) ? "number active" : "number")">
-                        <a href="?page=@i">@i</a>
-                    </li>
-                }
-            </ul>
-            @if (currentPage < Math.Ceiling((decimal)totalItems / itemsPerPage))
-            {
-                <a href="?page=@(currentPage + 1)" class="change">NEXT</a>
-            }
-            else
-            {
-                <span class="change inactive">NEXT</span>
-            }
-        </div>
-    </section>
-}

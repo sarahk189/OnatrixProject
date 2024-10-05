@@ -1,0 +1,74 @@
+﻿.question-form {
+    padding: 2rem 0;
+    background-color: #f9f9f9; /* Light background color for the form section */
+    border-radius: 0.5rem; /* Rounded corners for the form section */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for the form section */
+
+    .container {
+        .form-headline {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+            color: var(--color-primary);
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+            padding: 15px 20px;
+            background-color: white; /* White background for form groups */
+            border-radius: 0.5rem; /* Rounded corners for form groups */
+            box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for form groups */
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.75rem; /* Increased padding for form controls */
+            border: 1px solid var(--color-primary-light);
+            border-radius: 0.5rem; /* Rounded corners for form controls */
+            font-size: 1rem;
+            transition: border-color 0.3s, box-shadow 0.3s; /* Smooth transition for focus state */
+
+            &:focus {
+                border-color: var(--color-primary);
+                box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Subtle shadow on focus */
+                outline: none; /* Remove default outline */
+            }
+        }
+
+        .form-group-inline {
+            display: flex;
+            gap: 1rem;
+
+            .form-control {
+                flex: 1;
+            }
+        }
+
+        .text-danger {
+            color: var(--color-secondary);
+            font-size: 0.875rem;
+        }
+
+        .btn-primary {
+            display: block;
+            width: 100%;
+            padding: 0.75rem;
+            background-color: var(--color-primary);
+            color: white;
+            border: none;
+            border-radius: 0.5rem; /* Rounded corners for the button */
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s; /* Smooth transition for hover state */
+
+            &:hover {
+                background-color: var(--color-primary-dark);
+                transform: translateY(-2px); /* Slight lift on hover */
+            }
+
+            &:active {
+                transform: translateY(0); /* Reset lift on click */
+            }
+        }
+    }
+}

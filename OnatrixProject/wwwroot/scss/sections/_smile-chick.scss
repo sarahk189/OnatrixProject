@@ -2,14 +2,15 @@
     position: relative;
     height: 10rem;
     align-items: center;
+    margin-bottom: 5%;
 
     img {
         position: absolute;
         top: -30rem;
-        left: 12.5%;
+        left: 25%;
         z-index: 5;
-        width: 75%;
-        height: 35rem;
+        width: 50%;
+        height: auto;
         border-radius: 3px;
     }
     

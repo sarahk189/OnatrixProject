@@ -5,6 +5,10 @@
 @{
     Layout = "mainLayout.cshtml";
     ViewBag.Title = Model?.Name ?? "model name not working";
+
+    bool.TryParse(TempData["error_name"]?.ToString(), out bool error_name);
+    bool.TryParse(TempData["error_email"]?.ToString(), out bool error_email);
+    bool.TryParse(TempData["error_message"]?.ToString(), out bool error_message);
 }
 
 <section class="service-details">
@@ -20,5 +24,32 @@
         <div class="page-content">
             @Model?.Value("pageContent")
         </div>
+    </div>
+</section>
+<section class="question-form">
+    <div class="container">
+        <h2 class="form-headline">Have a Question?</h2>
+        @if (TempData["questionsuccess"] != null)
+        {
+            <div class="alert alert-success" role="alert">
+                @TempData["questionsuccess"]
+            </div>
+        }
+        @using (Html.BeginUmbracoForm("HandleSubmit", "QuestionSurface", FormMethod.Post))
+        {
+            <div class="form-group form-group-inline">
+                <input type="text" id="Name" name="Name" class="form-control" value="@ViewData["name"]" placeholder="Name" />
+                <span class="text-danger">@ViewData["error_name"]</span>
+            </div>
+            <div class="form-group form-group-inline">
+                <input type="email" id="Email" name="Email" class="form-control" value="@ViewData["email"]" placeholder="Email" />
+                <span class="text-danger">@ViewData["error_email"]</span>
+            </div>
+            <div class="form-group">
+                <textarea id="Message" name="Message" class="form-control" placeholder="Message">@ViewData["message"]</textarea>
+                <span class="text-danger">@ViewData["error_message"]</span>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        }
     </div>
 </section>

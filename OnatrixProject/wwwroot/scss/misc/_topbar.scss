@@ -17,14 +17,15 @@
     .social-media {
         display: none;
         height: 100%;
+        width: auto;
+        margin-left: auto;
 
         @include desktop {
-            display: flex;
+            display: inline-flex; 
         }
 
         a {
             display: flex;
-            flex: 0 0 20%;
             align-items: center;
             justify-content: center;
             padding: 1.5rem;
@@ -33,15 +34,14 @@
             color: white;
             text-decoration: none;
             transition: background-color 0.3s, color 0.3s, transform 0.3s;
-            border: .05px solid var(--color-primary-light);
+            border: 0.05px solid var(--color-primary-light);
 
- 
             &:first-child {
-                border-left: .1px solid var(--color-primary-light);
+                border-left: 0.1px solid var(--color-primary-light);
             }
 
             &:last-child {
-                border-right: .1px solid var(--color-primary-light);
+                border-right: 0.1px solid var(--color-primary-light);
             }
 
             &:hover {

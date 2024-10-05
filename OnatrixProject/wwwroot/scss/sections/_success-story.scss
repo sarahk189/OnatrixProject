@@ -9,8 +9,7 @@
     justify-content: center;
     align-items: center;
     height: auto;
-    overflow: hidden; 
-
+    overflow: hidden;
 
     .background {
         position: absolute;
@@ -44,7 +43,7 @@
     h6, h3 {
         text-align: center;
         z-index: 2;
-        margin: 0;
+        margin-bottom: 10%;
         padding: 0.5rem;
         color: var(--color-secondary);
         position: absolute;
@@ -75,13 +74,35 @@
         z-index: 3;
         position: relative;
         top: -35rem;
+        margin-top: 10%;
 
+        @include mobile {
+            flex-direction: column;
+            top: 0;
+            margin-top: 3rem;
+        }
+
+        @include tablet {
+            flex-direction: column;
+            top: 0;
+            margin-top: 3rem;
+        }
 
         .success-number-box {
             text-align: center;
             width: 20%;
             align-items: center;
             margin: 0 2rem;
+
+            @include mobile {
+                width: 80%;
+                margin: 1rem 0;
+            }
+
+            @include tablet {
+                width: 80%;
+                margin: 1rem 0;
+            }
 
             h1 {
                 margin: 0;
