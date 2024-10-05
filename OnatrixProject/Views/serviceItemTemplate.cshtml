@@ -18,7 +18,7 @@
                 @await Html.PartialAsync("Partials/static/aboutUsLink.cshtml")
             </div>
             <div class="contact">
-                @await Html.PartialAsync("Partials/static/onlineSupport.cshtml", new OnatrixProject.Models.ContactFormModels())
+                @await Html.PartialAsync("Partials/static/onlineSupport.cshtml", new OnatrixProject.Models.OnlineSupportFormModel())
             </div>
         </aside>
         <div class="page-content">
@@ -35,21 +35,31 @@
                 @TempData["questionsuccess"]
             </div>
         }
+        @if (TempData["questionerror"] != null)
+        {
+            <div class="alert alert-danger" role="alert">
+                @TempData["questionerror"]
+            </div>
+        }
         @using (Html.BeginUmbracoForm("HandleSubmit", "QuestionSurface", FormMethod.Post))
         {
-            <div class="form-group form-group-inline">
-                <input type="text" id="Name" name="Name" class="form-control" value="@ViewData["name"]" placeholder="Name" />
-                <span class="text-danger">@ViewData["error_name"]</span>
-            </div>
-            <div class="form-group form-group-inline">
-                <input type="email" id="Email" name="Email" class="form-control" value="@ViewData["email"]" placeholder="Email" />
-                <span class="text-danger">@ViewData["error_email"]</span>
+            <div id="form-group-inline">
+                <div class="form-group">
+                    <input type="text" id="Name" name="Name" class="form-control" value="@ViewData["name"]" placeholder="Name" />
+                    <span class="text-danger">@ViewData["error_name"]</span>
+                </div>
+                <div class="form-group">
+                    <input type="email" id="Email" name="Email" class="form-control" value="@ViewData["email"]" placeholder="Email" />
+                    <span class="text-danger">@ViewData["error_email"]</span>
+                </div>
             </div>
             <div class="form-group">
                 <textarea id="Message" name="Message" class="form-control" placeholder="Message">@ViewData["message"]</textarea>
                 <span class="text-danger">@ViewData["error_message"]</span>
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
         }
     </div>
 </section>

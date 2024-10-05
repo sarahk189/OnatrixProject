@@ -1,5 +1,8 @@
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
+// Register EmailService
+builder.Services.AddSingleton<OnatrixProject.Services.EmailService>();
+
 builder.CreateUmbracoBuilder()
     .AddBackOffice()
     .AddWebsite()

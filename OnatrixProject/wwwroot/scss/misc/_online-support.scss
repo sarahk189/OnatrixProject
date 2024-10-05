@@ -1,10 +1,10 @@
 .online-support-container {
-    height: 223px;
     background-size: cover;
     background-position: center;
     padding: 20px !important;
     color: var(--color-light);
     border-radius: 5px;
+    transition: height 0.3s ease; 
 
     .form-group {
         position: relative;
@@ -71,5 +71,9 @@
         i {
             font-size: 9rem;
         }
+    }
+
+    .alert {
+        margin-top: 20px;
     }
 }

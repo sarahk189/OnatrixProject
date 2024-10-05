@@ -1951,7 +1951,7 @@ h6 {
   z-index: 2;
   background: var(--color-light);
   padding: 10px;
-  display: flex;
+  display: grid;
   flex-direction: column;
   align-items: center;
   max-width: 80%;
@@ -1979,10 +1979,23 @@ h6 {
 }
 #contact-us .map-background .container .contact-form-overlay .form-grid {
   width: 100%;
-  display: flex;
+  display: grid;
   flex-direction: column;
   align-items: center;
   gap: 20px;
+  grid-area: "name email" "phone choice" "button button";
+}
+#contact-us .map-background .container .contact-form-overlay .form-grid #Name.form-input {
+  grid-area: name;
+}
+#contact-us .map-background .container .contact-form-overlay .form-grid #Email.form-input {
+  grid-area: email;
+}
+#contact-us .map-background .container .contact-form-overlay .form-grid #Phone.form-input {
+  grid-area: phone;
+}
+#contact-us .map-background .container .contact-form-overlay .form-grid #choices.form.input {
+  grid-area: choice;
 }
 #contact-us .map-background .container .contact-form-overlay .form-grid .form-input-group {
   width: 100%;
@@ -2120,10 +2133,19 @@ h6 {
 }
 
 .question-form {
-  padding: 2rem 0;
-  background-color: #f9f9f9; /* Light background color for the form section */
-  border-radius: 0.5rem; /* Rounded corners for the form section */
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for the form section */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: auto; /* Full viewport height to center vertically */
+  width: 100%; /* Full width */
+}
+.question-form .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 600px; /* Optional: Set a max-width for better layout */
+  justify-content: center;
 }
 .question-form .container .form-headline {
   text-align: center;
@@ -2133,29 +2155,31 @@ h6 {
 }
 .question-form .container .form-group {
   margin-bottom: 1rem;
-  padding: 15px 20px;
-  background-color: white; /* White background for form groups */
-  border-radius: 0.5rem; /* Rounded corners for form groups */
-  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for form groups */
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 .question-form .container .form-control {
   width: 100%;
-  padding: 0.75rem; /* Increased padding for form controls */
+  padding: 0.75rem;
   border: 1px solid var(--color-primary-light);
-  border-radius: 0.5rem; /* Rounded corners for form controls */
+  border-radius: 0.5rem;
   font-size: 1rem;
-  transition: border-color 0.3s, box-shadow 0.3s; /* Smooth transition for focus state */
+  transition: border-color 0.3s, box-shadow 0.3s;
 }
 .question-form .container .form-control:focus {
   border-color: var(--color-primary);
-  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Subtle shadow on focus */
-  outline: none; /* Remove default outline */
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  outline: none;
 }
-.question-form .container .form-group-inline {
+.question-form .container #form-group-inline {
   display: flex;
+  flex-direction: row;
   gap: 1rem;
+  width: 100%;
+  align-items: center;
 }
-.question-form .container .form-group-inline .form-control {
+.question-form .container #form-group-inline .form-group {
   flex: 1;
 }
 .question-form .container .text-danger {
@@ -2164,22 +2188,26 @@ h6 {
 }
 .question-form .container .btn-primary {
   display: block;
-  width: 100%;
+  width: 50%;
+  margin: 0 auto;
   padding: 0.75rem;
   background-color: var(--color-primary);
   color: white;
   border: none;
-  border-radius: 0.5rem; /* Rounded corners for the button */
+  border-radius: 0.5rem;
   font-size: 1rem;
   cursor: pointer;
-  transition: background-color 0.3s, transform 0.3s; /* Smooth transition for hover state */
+  transition: background-color 0.3s, transform 0.3s;
 }
 .question-form .container .btn-primary:hover {
   background-color: var(--color-primary-dark);
-  transform: translateY(-2px); /* Slight lift on hover */
+  transform: translateY(-2px);
 }
 .question-form .container .btn-primary:active {
-  transform: translateY(0); /* Reset lift on click */
+  transform: translateY(0);
+}
+.question-form .form-group textarea.form-control {
+  width: 80vh;
 }
 
 #prefooter {
@@ -2468,11 +2496,11 @@ header .container .search {
   font-size: 25px;
   margin-left: auto;
 }
-header .container .search #toggle-mobile-menu {
+header .container #toggle-mobile-menu {
   display: block;
 }
 @media (min-width: 1025px) {
-  header .container .search #toggle-mobile-menu {
+  header .container #toggle-mobile-menu {
     display: none;
   }
 }
@@ -3057,12 +3085,12 @@ footer .credits a {
 }
 
 .online-support-container {
-  height: 223px;
   background-size: cover;
   background-position: center;
   padding: 20px !important;
   color: var(--color-light);
   border-radius: 5px;
+  transition: height 0.3s ease;
 }
 .online-support-container .form-group {
   position: relative;
@@ -3119,4 +3147,7 @@ footer .credits a {
 }
 .online-support-container .background-icon i {
   font-size: 9rem;
+}
+.online-support-container .alert {
+  margin-top: 20px;
 }

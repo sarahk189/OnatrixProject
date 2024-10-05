@@ -39,6 +39,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="Azure.Communication.Email" Version="1.0.1" />
+		<PackageReference Include="Microsoft.Extensions.Azure" Version="1.7.6" />
 		<PackageReference Include="Umbraco.Cms" Version="14.2.0" />
 	</ItemGroup>
 
